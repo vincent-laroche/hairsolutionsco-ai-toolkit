@@ -1,6 +1,6 @@
 ---
 name: shopify-app-dev
-description: Build Shopify apps — Remix framework, App Bridge, OAuth, session tokens, webhooks, billing API, and extension development. Use when creating Shopify apps, building embedded apps, implementing Shopify OAuth, working with App Bridge, creating theme extensions, or building checkout extensions. Triggers: "shopify app", "app bridge", "shopify remix", "embedded app", "shopify oauth", "checkout extension", "theme extension".
+description: "Build Shopify apps — Remix framework, App Bridge, OAuth, session tokens, webhooks, billing API, and extension development. Use when creating Shopify apps, building embedded apps, implementing Shopify OAuth, working with App Bridge, creating theme extensions, or building checkout extensions. Triggers: \"shopify app\", \"app bridge\", \"shopify remix\", \"embedded app\", \"shopify oauth\", \"checkout extension\", \"theme extension\"."
 ---
 
 # Shopify App Development

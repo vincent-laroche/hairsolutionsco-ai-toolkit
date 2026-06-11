@@ -1,6 +1,6 @@
 ---
 name: shopify-liquid
-description: Use when writing, editing, reviewing, or debugging Shopify Liquid theme code for hairsolutions.co, including Horizon 3.5.1 sections, blocks, snippets, schema, dynamic sources, metaobjects, theme editor behavior, Liquid syntax, and theme-block architecture
+description: "Use when writing, editing, reviewing, or debugging Shopify Liquid theme code for hairsolutions.co, including Horizon 3.5.1 sections, blocks, snippets, schema, dynamic sources, metaobjects, theme editor behavior, Liquid syntax, and theme-block architecture"
 ---
 
 # Shopify Liquid

@@ -1,6 +1,6 @@
 ---
 name: shopify-liquid-genius
-description: This skill should be used when working with Shopify themes, Liquid templating, theme blocks, sections, dynamic sources, or any Shopify theme development tasks. Provides comprehensive guidance on building production-quality Shopify themes with focus on Horizon theme patterns, blocks architecture, schema design, and Liquid best practices.
+description: "This skill should be used when working with Shopify themes, Liquid templating, theme blocks, sections, dynamic sources, or any Shopify theme development tasks. Provides comprehensive guidance on building production-quality Shopify themes with focus on Horizon theme patterns, blocks architecture, schema design, and Liquid best practices."
 ---
 
 # Shopify Liquid Genius

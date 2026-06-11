@@ -1,6 +1,6 @@
 # Hair Solutions Co. — AI Toolkit
 
-A vendor-neutral marketplace of **Hair Solutions Co.** plugins, skills, agents, and commands for AI coding/agent apps (Claude Code / Cowork, Cursor, and others). The content (skills, commands, scripts, references) is app-agnostic; only the small catalog/manifest files are app-specific.
+A vendor-neutral marketplace of **Hair Solutions Co.** plugins, skills, agents, commands, and MCP servers for Claude Code / Cowork, Codex, Cursor, Gemini CLI, and Google Antigravity. Plugin content is shared; thin client-specific manifests expose it to each supported agent.
 
 - **Marketplace slug:** `hairsolutionsco`
 - **Owner:** Vincent Laroche
@@ -18,6 +18,50 @@ A vendor-neutral marketplace of **Hair Solutions Co.** plugins, skills, agents, 
 /reload-plugins
 ```
 
+## Install (Codex)
+
+```shell
+codex plugin marketplace add vincent-laroche/hairsolutionsco-ai-toolkit
+codex plugin add shopify-theme-dev@hairsolutionsco
+```
+
+Restart Codex after installing or updating a plugin.
+
+## Install (Cursor)
+
+Use **Install Plugin From Source** and enter:
+
+```text
+vincent-laroche/hairsolutionsco-ai-toolkit
+```
+
+Cursor reads `.cursor-plugin/marketplace.json` and each plugin's native
+`.cursor-plugin/plugin.json`.
+
+## Install (Gemini CLI)
+
+Gemini CLI currently installs one extension root at a time. Clone this repository,
+then install or link the required plugin directory:
+
+```shell
+git clone https://github.com/vincent-laroche/hairsolutionsco-ai-toolkit.git
+gemini extensions install ./hairsolutionsco-ai-toolkit/plugins/chrome-devtools-mcp
+```
+
+Use `gemini extensions link <plugin-directory>` during local development.
+
+## Install (Google Antigravity)
+
+Clone this repository, then run the non-destructive installer for the required
+plugin:
+
+```shell
+./scripts/install-antigravity-plugin.sh chrome-devtools-mcp
+```
+
+The installer refuses to replace existing skills and backs up Antigravity's MCP
+configuration before merging new servers.
+
 ## Plugins in this marketplace
 
 | Plugin | What it does |
@@ -30,27 +74,50 @@ A vendor-neutral marketplace of **Hair Solutions Co.** plugins, skills, agents, 
 | **analytics-ads** | Analytics + paid-ads skills. |
 | **marketing-content** | Marketing content creation skills. |
 | **business-integrations** | Business/SaaS integration skills. |
+| **chrome-devtools-mcp** | Official Chrome DevTools MCP server plus browser debugging, accessibility, performance, memory, and troubleshooting skills. |
 | **hubspot** | HubSpot CMS / CRM skills. |
 
-Each plugin lives under `plugins/<name>/` with its own `.claude-plugin/plugin.json` and `skills/ commands/ agents/ hooks/` as applicable. The marketplace catalog is `.claude-plugin/marketplace.json`.
+Each plugin lives under `plugins/<name>/` with shared `skills/`, `commands/`,
+`agents/`, hooks, scripts, and references. Client-specific manifests live
+alongside the shared content:
+
+- Claude: `.claude-plugin/plugin.json`
+- Codex: `.codex-plugin/plugin.json`
+- Cursor: `.cursor-plugin/plugin.json`
+- Gemini CLI: `gemini-extension.json`
+
+Root marketplace catalogs:
+
+- Claude: `.claude-plugin/marketplace.json`
+- Codex: `.agents/plugins/marketplace.json`
+- Cursor: `.cursor-plugin/marketplace.json`
 
 ## Structure
 
 ```
 hairsolutionsco-ai-toolkit/
 ├── .claude-plugin/
-│   └── marketplace.json        ← the catalog (lists every plugin)
+│   └── marketplace.json
+├── .agents/plugins/
+│   └── marketplace.json
+├── .cursor-plugin/
+│   └── marketplace.json
 ├── plugins/
 │   └── <plugin>/               ← one folder per plugin
 │       ├── .claude-plugin/plugin.json
+│       ├── .codex-plugin/plugin.json
+│       ├── .cursor-plugin/plugin.json
+│       ├── gemini-extension.json
 │       ├── skills/  commands/  agents/  hooks/ ...
+├── scripts/
+│   ├── sync-client-manifests.py
+│   └── install-antigravity-plugin.sh
 └── README.md
 ```
 
 ## Adding a new plugin later
 
-1. Drop the plugin folder under `plugins/<name>/` (must contain `.claude-plugin/plugin.json`).
-2. Add an entry to `.claude-plugin/marketplace.json` with `"source": "./plugins/<name>"`.
-3. Commit + push. Users run `/plugin marketplace update hairsolutionsco` to pick it up.
-
-To target other AI apps, add the matching catalog file alongside `.claude-plugin/` (e.g. `.cursor-plugin/marketplace.json`) pointing at the same `plugins/` folders.
+1. Add the plugin under `plugins/<name>/` with a canonical `.claude-plugin/plugin.json`.
+2. Add it to `.claude-plugin/marketplace.json`.
+3. Run `python3 scripts/sync-client-manifests.py`.
+4. Validate each client surface, commit, and push.

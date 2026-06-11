@@ -1,7 +1,7 @@
 ---
 description: Design a new Shopify section with Liquid + UI/UX system
-allowed-tools: Read, Write, Edit, Bash(ls:*)
-argument-hint: [section-name] [style?] [stack?]
+allowed-tools: "Read, Write, Edit, Bash(ls:*)"
+argument-hint: "[section-name] [style?] [stack?]"
 ---
 
 Design and generate a production-ready Shopify Liquid section file based on: $ARGUMENTS

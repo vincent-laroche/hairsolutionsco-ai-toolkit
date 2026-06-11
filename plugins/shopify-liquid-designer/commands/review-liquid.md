@@ -1,7 +1,7 @@
 ---
 description: Review Liquid code for UX, performance, and best practices
-allowed-tools: Read, Grep, Edit
-argument-hint: [file-path or paste code]
+allowed-tools: "Read, Grep, Edit"
+argument-hint: "[file-path or paste code]"
 ---
 
 Review the following Shopify Liquid code for quality, performance, UX, and best practices: $ARGUMENTS

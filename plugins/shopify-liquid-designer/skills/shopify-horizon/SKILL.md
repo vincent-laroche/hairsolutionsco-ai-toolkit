@@ -1,6 +1,6 @@
 ---
 name: shopify-horizon
-description: Comprehensive Shopify Horizon theme development skill covering theme blocks, Liquid patterns, section schemas, metafields/metaobjects integration, responsive design, and custom sections. Use when working with Shopify Horizon themes, customizing sections, creating theme blocks, displaying metafields/metaobjects, building responsive layouts, troubleshooting Liquid code, or implementing custom product options and features.
+description: "Comprehensive Shopify Horizon theme development skill covering theme blocks, Liquid patterns, section schemas, metafields/metaobjects integration, responsive design, and custom sections. Use when working with Shopify Horizon themes, customizing sections, creating theme blocks, displaying metafields/metaobjects, building responsive layouts, troubleshooting Liquid code, or implementing custom product options and features."
 ---
 
 # Shopify Horizon Theme Mastery

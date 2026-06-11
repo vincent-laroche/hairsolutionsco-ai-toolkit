@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Make design decisions for Shopify stores — color systems, typography, spacing, component patterns, accessibility, responsive design, and CSS architecture. Use when making design decisions, choosing colors and fonts, building design systems, creating CSS custom properties, ensuring accessibility, or establishing visual hierarchy. Triggers: "design decisions", "color palette", "typography", "design system", "CSS variables", "visual hierarchy", "brand colors", "font choice".
+description: "Make design decisions for Shopify stores — color systems, typography, spacing, component patterns, accessibility, responsive design, and CSS architecture. Use when making design decisions, choosing colors and fonts, building design systems, creating CSS custom properties, ensuring accessibility, or establishing visual hierarchy. Triggers: \"design decisions\", \"color palette\", \"typography\", \"design system\", \"CSS variables\", \"visual hierarchy\", \"brand colors\", \"font choice\"."
 ---
 
 # Frontend Design Decisions for Shopify

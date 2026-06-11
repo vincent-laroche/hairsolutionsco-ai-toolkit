@@ -1,6 +1,6 @@
 ---
 name: shopify-front-end
-description: Use when designing, editing, reviewing, or debugging the customer-facing front end of hairsolutions.co, including Horizon 3.5.1 CSS, JavaScript, responsive layouts, product-page UI, theme-block presentation, accessibility, animations, Core Web Vitals, and mobile storefront experience
+description: "Use when designing, editing, reviewing, or debugging the customer-facing front end of hairsolutions.co, including Horizon 3.5.1 CSS, JavaScript, responsive layouts, product-page UI, theme-block presentation, accessibility, animations, Core Web Vitals, and mobile storefront experience"
 ---
 
 # Shopify Front-end

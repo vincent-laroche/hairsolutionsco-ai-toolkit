@@ -1,6 +1,6 @@
 ---
 name: connect-apps
-description: Connect Claude to 1000+ external apps and services using Composio Tool Router. Use this skill when working with app integrations, automating cross-platform workflows, connecting to Gmail, Slack, GitHub, HubSpot, Notion, Google Sheets, Airtable, PostgreSQL, or any other SaaS tool. Triggers: "connect to", "integrate with", "automate across apps", "composio", "tool router", "app integration".
+description: "Connect Claude to 1000+ external apps and services using Composio Tool Router. Use this skill when working with app integrations, automating cross-platform workflows, connecting to Gmail, Slack, GitHub, HubSpot, Notion, Google Sheets, Airtable, PostgreSQL, or any other SaaS tool. Triggers: \"connect to\", \"integrate with\", \"automate across apps\", \"composio\", \"tool router\", \"app integration\"."
 ---
 
 # Composio Connect Apps

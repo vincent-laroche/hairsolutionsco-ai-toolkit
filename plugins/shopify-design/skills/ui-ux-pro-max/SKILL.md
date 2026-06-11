@@ -1,6 +1,6 @@
 ---
 name: ui-ux-pro-max
-description: Apply professional UI/UX design patterns — 67+ UI component styles, 96 color palettes, conversion-optimized layouts, interaction design, and user experience best practices. Use when designing UI components, improving UX flows, selecting color palettes, creating conversion-optimized layouts, designing product pages, or applying design system patterns. Triggers: "UI design", "UX", "design pattern", "color palette", "component design", "layout", "conversion design", "user experience".
+description: "Apply professional UI/UX design patterns — 67+ UI component styles, 96 color palettes, conversion-optimized layouts, interaction design, and user experience best practices. Use when designing UI components, improving UX flows, selecting color palettes, creating conversion-optimized layouts, designing product pages, or applying design system patterns. Triggers: \"UI design\", \"UX\", \"design pattern\", \"color palette\", \"component design\", \"layout\", \"conversion design\", \"user experience\"."
 ---
 
 # UI/UX Pro Max Design System

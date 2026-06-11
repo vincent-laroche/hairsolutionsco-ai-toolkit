@@ -1,6 +1,6 @@
 ---
 name: hubspot-how-to
-description: Step-by-step procedures for common HubSpot tasks — creating and editing workflows, managing contacts and lists, building sequences and emails, and creating reports and dashboards. Use when asked how to create, configure, or manage anything in the HubSpot UI. Do NOT use for CRM data model questions (use hubspot-crm-model), automation strategy (use hubspot-business-ops), or developer/API tasks (use hubspot-developer).
+description: "Step-by-step procedures for common HubSpot tasks — creating and editing workflows, managing contacts and lists, building sequences and emails, and creating reports and dashboards. Use when asked how to create, configure, or manage anything in the HubSpot UI. Do NOT use for CRM data model questions (use hubspot-crm-model), automation strategy (use hubspot-business-ops), or developer/API tasks (use hubspot-developer)."
 ---
 
 # HubSpot How-To Procedures — Hair Solutions Co.

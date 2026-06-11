@@ -1,6 +1,6 @@
 ---
 name: shopify-performance
-description: Optimize Shopify store speed — Core Web Vitals, image optimization, JavaScript reduction, CSS delivery, lazy loading, and Lighthouse score improvement. Use when improving page speed, fixing Core Web Vitals, reducing LCP, CLS, or FID, optimizing images, reducing JavaScript bundle, or auditing theme performance. Triggers: "shopify speed", "page speed", "lighthouse score", "core web vitals", "LCP", "slow store", "performance optimization".
+description: "Optimize Shopify store speed — Core Web Vitals, image optimization, JavaScript reduction, CSS delivery, lazy loading, and Lighthouse score improvement. Use when improving page speed, fixing Core Web Vitals, reducing LCP, CLS, or FID, optimizing images, reducing JavaScript bundle, or auditing theme performance. Triggers: \"shopify speed\", \"page speed\", \"lighthouse score\", \"core web vitals\", \"LCP\", \"slow store\", \"performance optimization\"."
 ---
 
 # Shopify Performance Optimization

@@ -1,6 +1,6 @@
 ---
 name: shopify-api
-description: Work with Shopify Admin API and Storefront API — products, orders, customers, inventory, metafields, GraphQL, webhooks, and REST endpoints. Use when querying Shopify data, syncing products, managing orders programmatically, building custom storefronts, using Shopify GraphQL, or managing metafields. Triggers: "shopify admin api", "storefront api", "shopify graphql", "shopify rest", "shopify orders", "shopify products API", "metafields API".
+description: "Work with Shopify Admin API and Storefront API — products, orders, customers, inventory, metafields, GraphQL, webhooks, and REST endpoints. Use when querying Shopify data, syncing products, managing orders programmatically, building custom storefronts, using Shopify GraphQL, or managing metafields. Triggers: \"shopify admin api\", \"storefront api\", \"shopify graphql\", \"shopify rest\", \"shopify orders\", \"shopify products API\", \"metafields API\"."
 ---
 
 # Shopify API

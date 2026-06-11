@@ -1,6 +1,6 @@
 ---
 name: shopify-liquid
-description: Write and debug Shopify Liquid templates — syntax, objects, filters, tags, loops, conditionals, and theme architecture. Use when writing Liquid code, building sections, creating snippets, debugging templates, accessing Shopify objects (product, collection, cart, customer), or applying Liquid filters. Triggers: "liquid", "shopify liquid", "liquid template", "{{ }}", "{% %}", "section schema", "liquid filter".
+description: "Write and debug Shopify Liquid templates — syntax, objects, filters, tags, loops, conditionals, and theme architecture. Use when writing Liquid code, building sections, creating snippets, debugging templates, accessing Shopify objects (product, collection, cart, customer), or applying Liquid filters. Triggers: \"liquid\", \"shopify liquid\", \"liquid template\", \"{{ }}\", \"{% %}\", \"section schema\", \"liquid filter\"."
 ---
 
 # Shopify Liquid Templating

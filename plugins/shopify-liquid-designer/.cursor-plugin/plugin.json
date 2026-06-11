@@ -1,21 +1,24 @@
 {
   "name": "shopify-liquid-designer",
-  "displayName": "Shopify Liquid Designer (Hair Solutions Co.)",
-  "version": "1.0.0",
-  "description": "Workspace-local Shopify skill bundle for Horizon theme development, Liquid, frontend, metaobjects, APIs, and production safety.",
+  "version": "0.3.0",
+  "description": "Design-first Shopify theme development for Hair Solutions Co. Design in Figma first, generate production-ready Liquid with floating cards, Horizon theme mastery, Storefront API support, and full UI/UX intelligence.",
   "author": {
-    "name": "Hair Solutions Co.",
-    "email": "vincent@hairsolutions.co"
+    "name": "Hair Solutions Co"
   },
-  "license": "MIT",
   "keywords": [
     "shopify",
     "liquid",
     "horizon",
+    "ui-ux",
     "theme",
-    "metaobjects",
     "storefront-api",
-    "hair-solutions",
-    "skills"
-  ]
+    "design",
+    "figma",
+    "floating-cards",
+    "metafields",
+    "metaobjects"
+  ],
+  "skills": "./skills/",
+  "commands": "./commands/",
+  "mcpServers": "./.mcp.json"
 }

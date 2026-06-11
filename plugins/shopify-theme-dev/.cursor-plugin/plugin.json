@@ -1,0 +1,25 @@
+{
+  "name": "shopify-theme-dev",
+  "version": "1.0.0",
+  "description": "Designer-in-Chief, Creative Director, and Liquid-specialist toolkit for the OneHead Hair Solutions storefront (hairsolutions.co) — brand system, OS 2.0 sections, Cloudinary AssetLink media, Notion change-tracker, and ship-to-main workflow.",
+  "author": {
+    "name": "Vincent Laroche",
+    "email": "vincent.laroche@oneheadhair.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "shopify",
+    "liquid",
+    "theme",
+    "horizon",
+    "hairsolutions",
+    "cloudinary",
+    "notion",
+    "design-system",
+    "seo"
+  ],
+  "skills": "./skills/",
+  "commands": "./commands/",
+  "agents": "./agents/",
+  "hooks": "./hooks/hooks.json"
+}

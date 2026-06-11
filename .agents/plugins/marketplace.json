@@ -1,0 +1,128 @@
+{
+  "name": "hairsolutionsco",
+  "interface": {
+    "displayName": "Hair Solutions Co. AI Toolkit"
+  },
+  "plugins": [
+    {
+      "name": "ai-video",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ai-video"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Marketing"
+    },
+    {
+      "name": "analytics-ads",
+      "source": {
+        "source": "local",
+        "path": "./plugins/analytics-ads"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Marketing"
+    },
+    {
+      "name": "business-integrations",
+      "source": {
+        "source": "local",
+        "path": "./plugins/business-integrations"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "chrome-devtools-mcp",
+      "source": {
+        "source": "local",
+        "path": "./plugins/chrome-devtools-mcp"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "hubspot",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hubspot"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "marketing-content",
+      "source": {
+        "source": "local",
+        "path": "./plugins/marketing-content"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Marketing"
+    },
+    {
+      "name": "shopify-design",
+      "source": {
+        "source": "local",
+        "path": "./plugins/shopify-design"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "shopify-developer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/shopify-developer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "shopify-liquid-designer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/shopify-liquid-designer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "shopify-theme-dev",
+      "source": {
+        "source": "local",
+        "path": "./plugins/shopify-theme-dev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

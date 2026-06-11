@@ -1,6 +1,6 @@
 ---
 name: figma-automation
-description: Automate Figma workflows — export assets, generate design tokens, sync designs to code, create component variants, and use the Figma API for design automation. Use when exporting Figma assets programmatically, syncing design tokens, automating component generation, reading Figma file data, or integrating Figma into development workflows. Triggers: "figma", "figma api", "design tokens", "export figma", "figma automation", "sync design".
+description: "Automate Figma workflows — export assets, generate design tokens, sync designs to code, create component variants, and use the Figma API for design automation. Use when exporting Figma assets programmatically, syncing design tokens, automating component generation, reading Figma file data, or integrating Figma into development workflows. Triggers: \"figma\", \"figma api\", \"design tokens\", \"export figma\", \"figma automation\", \"sync design\"."
 ---
 
 # Figma Automation

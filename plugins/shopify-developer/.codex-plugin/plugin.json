@@ -1,0 +1,34 @@
+{
+  "name": "shopify-developer",
+  "version": "1.0.0",
+  "description": "Shopify theme development for Hair Solutions Co. — Horizon 3.5.1 Liquid, front-end CSS/JS, and production operations.",
+  "author": {
+    "name": "Hair Solutions Co"
+  },
+  "homepage": "https://hairsolutions.co",
+  "repository": "https://github.com/vincent-laroche/hairsolutionsco-ai-toolkit/tree/main/plugins/shopify-developer",
+  "license": "Proprietary",
+  "keywords": [
+    "shopify",
+    "liquid",
+    "horizon",
+    "theme",
+    "storefront",
+    "production",
+    "front-end"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Shopify Developer",
+    "shortDescription": "Shopify theme development for Hair Solutions Co. — Horizon 3.5.1 Liquid, front-end CSS/JS, and production operations.",
+    "longDescription": "Shopify theme development for Hair Solutions Co. — Horizon 3.5.1 Liquid, front-end CSS/JS, and production operations.",
+    "developerName": "Hair Solutions Co",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Skills"
+    ],
+    "defaultPrompt": [
+      "Use shopify-developer for this task."
+    ]
+  }
+}

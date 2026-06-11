@@ -1,0 +1,40 @@
+{
+  "name": "shopify-liquid-designer",
+  "version": "0.3.0",
+  "description": "Design-first Shopify theme development for Hair Solutions Co. Design in Figma first, generate production-ready Liquid with floating cards, Horizon theme mastery, Storefront API support, and full UI/UX intelligence.",
+  "author": {
+    "name": "Hair Solutions Co"
+  },
+  "homepage": "https://hairsolutions.co",
+  "repository": "https://github.com/vincent-laroche/hairsolutionsco-ai-toolkit/tree/main/plugins/shopify-liquid-designer",
+  "license": "Proprietary",
+  "keywords": [
+    "shopify",
+    "liquid",
+    "horizon",
+    "ui-ux",
+    "theme",
+    "storefront-api",
+    "design",
+    "figma",
+    "floating-cards",
+    "metafields",
+    "metaobjects"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Shopify Liquid Designer",
+    "shortDescription": "Design-first Shopify theme development for Hair Solutions Co. Design in Figma first, generate production-ready Liquid...",
+    "longDescription": "Design-first Shopify theme development for Hair Solutions Co. Design in Figma first, generate production-ready Liquid with floating cards, Horizon theme mastery, Storefront API support, and full UI/UX intelligence.",
+    "developerName": "Hair Solutions Co",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Skills",
+      "MCP"
+    ],
+    "defaultPrompt": [
+      "Use shopify-liquid-designer for this task."
+    ]
+  }
+}

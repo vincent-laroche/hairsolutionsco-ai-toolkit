@@ -1,6 +1,6 @@
 ---
 name: shopify-production
-description: Use when planning, validating, previewing, deploying, auditing, or operating Shopify production changes for hairsolutions.co, including Horizon 3.5.1 theme safety, live theme protection, app compatibility, performance risk, rollback planning, Shopify CLI workflows, and approval-gated publish actions
+description: "Use when planning, validating, previewing, deploying, auditing, or operating Shopify production changes for hairsolutions.co, including Horizon 3.5.1 theme safety, live theme protection, app compatibility, performance risk, rollback planning, Shopify CLI workflows, and approval-gated publish actions"
 ---
 
 # Shopify Production

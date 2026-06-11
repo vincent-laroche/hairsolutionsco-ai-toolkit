@@ -1,7 +1,7 @@
 ---
 description: Plan a full Shopify theme with design system applied
-allowed-tools: Read, Write, Edit
-argument-hint: [store-type] [style?]
+allowed-tools: "Read, Write, Edit"
+argument-hint: "[store-type] [style?]"
 ---
 
 Create a complete Shopify theme design system and architecture plan for: $ARGUMENTS

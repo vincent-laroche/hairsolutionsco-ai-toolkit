@@ -1,7 +1,7 @@
 ---
 description: Push theme changes to Hair Solutions Co. Shopify store
-allowed-tools: Read, Bash(ls:*, cat:*)
-argument-hint: [method?] — zip | cli | manual (default: guide user to best method)
+allowed-tools: "Read, Bash(ls:*, cat:*)"
+argument-hint: "[method?] — zip | cli | manual (default: guide user to best method)"
 ---
 
 Help deploy Shopify theme changes to the Hair Solutions Co. store: $ARGUMENTS
@@ -98,4 +98,3 @@ If something breaks after publishing:
 2. Find the previous theme version
 3. Click "Publish" to instantly roll back
 4. Always keep at least 1 backup theme available
-

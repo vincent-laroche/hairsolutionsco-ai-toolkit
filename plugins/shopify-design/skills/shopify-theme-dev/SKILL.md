@@ -1,6 +1,6 @@
 ---
 name: shopify-theme-dev
-description: Develop and customize Shopify themes — theme architecture, sections, blocks, Dawn/Horizon patterns, Online Store 2.0 features, theme settings, and local development workflow. Use when building custom themes, customizing existing themes, creating new sections, working with theme blocks, setting up local development, or managing theme files. Triggers: "shopify theme", "theme development", "section", "theme block", "dawn theme", "horizon theme", "OS 2.0", "shopify CLI".
+description: "Develop and customize Shopify themes — theme architecture, sections, blocks, Dawn/Horizon patterns, Online Store 2.0 features, theme settings, and local development workflow. Use when building custom themes, customizing existing themes, creating new sections, working with theme blocks, setting up local development, or managing theme files. Triggers: \"shopify theme\", \"theme development\", \"section\", \"theme block\", \"dawn theme\", \"horizon theme\", \"OS 2.0\", \"shopify CLI\"."
 ---
 
 # Shopify Theme Development

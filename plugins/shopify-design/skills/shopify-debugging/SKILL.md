@@ -1,6 +1,6 @@
 ---
 name: shopify-debugging
-description: Debug Shopify theme issues — Liquid errors, JavaScript console errors, rendering problems, cart issues, variant selection bugs, and theme customizer problems. Use when troubleshooting Shopify issues, fixing Liquid errors, debugging theme customizer settings not saving, investigating cart problems, or diagnosing display issues. Triggers: "shopify bug", "liquid error", "theme not working", "debug shopify", "shopify issue", "section not showing".
+description: "Debug Shopify theme issues — Liquid errors, JavaScript console errors, rendering problems, cart issues, variant selection bugs, and theme customizer problems. Use when troubleshooting Shopify issues, fixing Liquid errors, debugging theme customizer settings not saving, investigating cart problems, or diagnosing display issues. Triggers: \"shopify bug\", \"liquid error\", \"theme not working\", \"debug shopify\", \"shopify issue\", \"section not showing\"."
 ---
 
 # Shopify Theme Debugging
