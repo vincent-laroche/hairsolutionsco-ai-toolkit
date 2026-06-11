@@ -27,7 +27,8 @@ clear_locks() {
   local out="$1" moved=0
   for lock in \
       ".git/index.lock" ".git/HEAD.lock" ".git/packed-refs.lock" \
-      $(find .git/refs -name '*.lock' 2>/dev/null); do
+      $(find .git/refs -name '*.lock' 2>/dev/null) \
+      $(find .git/objects -maxdepth 1 -name 'maintenance.lock*' 2>/dev/null); do
     if [[ -e "$lock" ]]; then
       if mv "$lock" "${lock}.bak" 2>/dev/null; then
         echo "  cleared (mv) $lock" >&2
@@ -38,6 +39,19 @@ clear_locks() {
     fi
   done
   return $((1 - moved))   # 0 if we moved at least one
+}
+
+# Report (don't fail on) leftover *.lock.bak / scratch files from past lock-clear
+# attempts that the FUSE sandbox couldn't unlink. Harmless — git ignores .git/
+# internals and the whitelist .gitignore keeps stray top-level files untracked —
+# but surface them once so the user can sweep with a real-terminal `rm -f`.
+report_residue() {
+  local residue
+  residue="$(find .git -name '*.lock.bak' 2>/dev/null; find . -maxdepth 2 \( -name 'leftover_*' -o -name '_writetest*' \) 2>/dev/null)"
+  if [[ -n "$residue" ]]; then
+    echo "NOTE: stale lock/residue files present (cosmetic, safe to ignore or run /fix-git-locks):" >&2
+    echo "$residue" | sed 's/^/  /' >&2
+  fi
 }
 
 # Run a git step; on lock-related failure, clear locks and retry once.
@@ -57,6 +71,8 @@ run_step() {
 }
 
 echo "== git_safe_commit_push: $REPO ($BRANCH) =="
+
+report_residue
 
 run_step "add" git add -A || { echo "STATUS: failed at 'git add'"; exit 1; }
 

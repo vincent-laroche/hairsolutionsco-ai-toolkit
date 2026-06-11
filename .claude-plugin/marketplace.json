@@ -4,7 +4,7 @@
     "name": "Vincent Laroche"
   },
   "metadata": {
-    "description": "Hair Solutions Co. AI toolkit — agents, skills, and commands for Claude, Cursor, and other AI apps."
+    "description": "Hair Solutions Co. AI toolkit \u2014 agents, skills, and commands for Claude, Cursor, and other AI apps."
   },
   "plugins": [
     {
@@ -47,7 +47,7 @@
     {
       "name": "hubspot",
       "source": "./plugins/hubspot",
-      "description": "HubSpot for Hair Solutions Co. — split into focused skills: CRM data model, business operations & automation strategy, developer integrations (Agent Tools, Breeze, Custom Channels), and step-by-step UI how-to procedures.",
+      "description": "HubSpot for Hair Solutions Co. \u2014 split into focused skills: CRM data model, business operations & automation strategy, developer integrations (Agent Tools, Breeze, Custom Channels), and step-by-step UI how-to procedures.",
       "version": "1.0.0",
       "author": {
         "name": "Hair Solutions Co"
@@ -74,7 +74,7 @@
     {
       "name": "shopify-developer",
       "source": "./plugins/shopify-developer",
-      "description": "Shopify theme development for Hair Solutions Co. — Horizon 3.5.1 Liquid, front-end CSS/JS, and production operations.",
+      "description": "Shopify theme development for Hair Solutions Co. \u2014 Horizon 3.5.1 Liquid, front-end CSS/JS, and production operations.",
       "version": "1.0.0",
       "author": {
         "name": "Hair Solutions Co"
@@ -92,10 +92,19 @@
     {
       "name": "shopify-theme-dev",
       "source": "./plugins/shopify-theme-dev",
-      "description": "Designer-in-Chief, Creative Director, and Liquid-specialist toolkit for the OneHead Hair Solutions storefront (hairsolutions.co) — brand system, OS 2.0 sections, Cloudinary AssetLink media, Notion change-tracker, and ship-to-main workflow.",
-      "version": "1.0.0",
+      "description": "Designer-in-Chief, Creative Director, and Liquid-specialist toolkit for the OneHead Hair Solutions storefront (hairsolutions.co) \u2014 brand system, OS 2.0 sections, Cloudinary AssetLink media, Notion change-tracker, and ship-to-main workflow.",
+      "version": "1.1.0",
       "author": {
         "name": "Vincent Laroche"
+      }
+    },
+    {
+      "name": "seo-tools",
+      "source": "./plugins/seo-tools",
+      "description": "SEO and Google Search Console tools for Hair Solutions Co.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Hair Solutions Co."
       }
     }
   ]

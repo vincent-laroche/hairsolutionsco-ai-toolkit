@@ -30,4 +30,12 @@ Review a `.liquid` section/template against the brand system, the architecture r
 
 6. **Mobile** — sanity-check 320 / 375 / 390 / 430px behavior and the spacing halving.
 
-7. **Output a pass/fail punch list**, grouped Brand / Architecture / SEO / Mobile, most impactful first, each with the exact fix. End with an overall PASS or NEEDS-FIXES verdict. If NEEDS-FIXES, do not `/ship` until resolved.
+7. **Live QA via `chrome-devtools-mcp`** (bundled with this plugin — `mcp__chrome-devtools__*`), if a preview URL is reachable (theme preview / dev store URL, or the live `hairsolutions.co` page once shipped):
+   - `new_page` / `navigate_page` to the page containing this section.
+   - `resize_page` to each of 320, 375, 390, 430, 768, 1280, 1440px and `take_screenshot` at each — confirm the section matches the brand check (no overflow, no full-width buttons, correct image side, hero font-size floor).
+   - `list_console_messages` — flag any new JS errors/warnings introduced by this change.
+   - `take_snapshot` — spot-check heading order and landmark structure against the SEO check.
+   - For hero/LCP sections, run `performance_start_trace` / `performance_stop_trace` (or `lighthouse_audit` if available) and confirm the hero image is the LCP element with no obvious regressions.
+   - If no reachable preview exists, note this explicitly in the punch list as "Visual QA skipped — no preview URL" rather than silently omitting it.
+
+8. **Output a pass/fail punch list**, grouped Brand / Architecture / SEO / Mobile / Live QA, most impactful first, each with the exact fix. End with an overall PASS or NEEDS-FIXES verdict. If NEEDS-FIXES, do not `/ship` until resolved.

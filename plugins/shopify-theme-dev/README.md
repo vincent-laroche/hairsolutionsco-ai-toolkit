@@ -31,14 +31,16 @@ It turns the ad-hoc workflow that's been running in Cowork sessions into somethi
 
 **Hooks** (`hooks/hooks.json`) — a PreToolUse gate that validates changed Liquid/schema/JSON before a push/commit, and a PostToolUse reminder to run `/design-check` after editing a section/block/template.
 
-**References** (`references/`) — `Design.md`, `tokens.css` (authoritative tokens), `AGENTS.md`, and `notion-schema.json` (cached schema for drift detection).
+**References** (`references/`) — `Design.md`, `tokens.css` (authoritative tokens), `AGENTS.md`, `homepage-map.md` (condensed homepage section→file map), and `notion-schema.json` (cached schema for drift detection).
+
+**MCP** (`.mcp.json`) — bundles the official **`chrome-devtools-mcp`** server (`mcp__chrome-devtools__*`) for the live-QA step in `/design-check`: screenshots and console/network/Lighthouse checks at 320–1440px breakpoints. No setup needed beyond Node/npx being available.
 
 ## Assumptions
 
 - The storefront repo is connected at `/Users/vMac/06_storefront` (required for the git workflow; `main` is Shopify-synced).
 - A **GitHub PAT** is configured per the `git-ship-workflow` skill (gitignored `.git-credentials`, HTTPS remote). Pushes go live — never ship partial work.
 - A **Notion integration token** is available at runtime as `NOTION_TOKEN` for the REST fallback (the Notion MCP is preferred when connected). Never hardcode it.
-- The **Cloudinary AssetLink API key** lives in `/Users/vMac/.env` and is read at runtime — it is not needed for delivery-URL construction.
+- **Cloudinary** media (cloud `dtmizxj1n`) is managed primarily through the **Cloudinary Asset Management** connector (`search-assets`, `visual-search-assets`, `list-images`, `upload-asset`, `transform-asset`, etc. — see `.mcp.json` `_expectedConnectors`) plus the `cloudinary` connector/skills for delivery-URL transformations. Enable both in **Settings → Capabilities**. The AssetLink API key in `/Users/vMac/.env` is only needed for raw Admin API calls outside these MCP tools.
 
 No secrets (PAT, Notion token, Cloudinary key) are stored anywhere in this plugin.
 

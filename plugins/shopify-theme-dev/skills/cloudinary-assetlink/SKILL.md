@@ -71,15 +71,27 @@ Ready-to-paste hero `<img>` (LCP):
   alt="Client wearing a hand-knotted lace hair system, natural light">
 ```
 
+## Cloudinary Asset Management MCP (preferred for media operations)
+
+The **Cloudinary Asset Management** connector (`mcp__Cloudinary_Asset_Management__*`, default-on per `.mcp.json`) is the primary tool for finding, uploading, and organizing media in cloud `dtmizxj1n` — no API key needed for search/list operations:
+
+- **Find media**: `search-assets` / `visual-search-assets` (search by description/visual similarity), `list-images`, `list-videos`, `list-files`, `search-folders`, `get-asset-details`.
+- **Upload & organize**: `upload-asset` (push a generated/edited image straight into `marketing/`, `products/`, `pages/`, etc.), `create-folder`, `move-folder`, `asset-rename`, `asset-update` (metadata/tags), `create-asset-relations`.
+- **Transform & export**: `transform-asset`, `generate-archive`, `download-asset-backup`.
+- **Housekeeping** (destructive — confirm with the user first): `delete-asset`, `delete-derived-assets`, `delete-folder`, `delete-asset-relations`.
+- Use `list-tags` / `get-usage-details` / `get-tx-reference` for tagging and account usage checks.
+
+For URL-transformation syntax and debugging (`f_auto`, `q_auto`, `t_hsc_*` named transforms), pair this with the `cloudinary:cloudinary-transformations` / `cloudinary:cloudinary-docs` skills and `scripts/cloudinary_url.py` / `/cloudinary-url`.
+
 ## The AssetLink workflow (Shopify ⇄ Cloudinary)
 
 1. **Generate** media in the design stack (Higgsfield for image/video, HeyGen for avatar video) following the brand photography direction.
-2. **Upload to Cloudinary** into the correct folder with a descriptive, SEO-friendly public ID.
+2. **Upload to Cloudinary** via the Cloudinary Asset Management `upload-asset` tool, into the correct folder with a descriptive, SEO-friendly public ID.
 3. **Link in Shopify admin via AssetLink** — open the AssetLink extension on the relevant product / collection / article / page and link the Cloudinary asset. AssetLink stores the delivery reference (typically a metafield) so the storefront pulls from Cloudinary's CDN. The API key keeps the Media Library loaded inside Shopify admin for one-click linking.
 4. **Reference in Liquid** from the linked source (the AssetLink metafield/section setting) — **not** through Shopify's `image_url` filter, since the asset lives on Cloudinary. Build responsive delivery with the Cloudinary transformations above.
 
 > First time wiring a page, verify the exact AssetLink metafield namespace/keys in the live store (via the Shopify Admin connector / `graphql_query`) and record them in memory so later sessions reuse them. (Still TODO to capture as of this writing.)
 
-## Key-access constraint (important)
+## Key-access constraint (now rarely needed)
 
-The AssetLink API key lives in `/Users/vMac/.env`, which in this repo is a **symlink to `/Users/vMac/.env` outside any mountable folder** — so it is **unreadable from the Cowork sandbox** (bash can't follow the symlink; Read refuses; `/Users/vMac` can't be mounted). Any Cloudinary admin operation that needs the key (uploads, signed transforms, Admin API automation) must happen via a path the user enables — e.g. the user drops a real (non-symlink) credentials file into the connected repo, or runs the operation on their own machine. Delivery-URL construction (above) needs **no key** and works anywhere.
+The AssetLink API key lives in `/Users/vMac/.env`, which in this repo is a **symlink to `/Users/vMac/.env` outside any mountable folder** — so it is **unreadable from the Cowork sandbox** (bash can't follow the symlink; Read refuses; `/Users/vMac` can't be mounted). With the Cloudinary Asset Management connector available, this is rarely a blocker: searching, uploading, organizing, transforming, and deleting assets all go through the MCP tools above, which need no key. The key is only relevant for raw Admin API calls outside those MCP tools (e.g. custom signed-upload presets) — for those, the user runs the operation on their own machine or drops a real (non-symlink) credentials file into the connected repo. Delivery-URL construction (above) needs **no key** and works anywhere.

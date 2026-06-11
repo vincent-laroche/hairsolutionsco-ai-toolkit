@@ -1,6 +1,6 @@
 {
   "name": "shopify-theme-dev",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Designer-in-Chief, Creative Director, and Liquid-specialist toolkit for the OneHead Hair Solutions storefront (hairsolutions.co) — brand system, OS 2.0 sections, Cloudinary AssetLink media, Notion change-tracker, and ship-to-main workflow.",
   "author": {
     "name": "Vincent Laroche",
@@ -18,9 +18,12 @@
     "cloudinary",
     "notion",
     "design-system",
-    "seo"
+    "seo",
+    "chrome-devtools",
+    "qa"
   ],
   "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Shopify Theme Dev",
     "shortDescription": "Designer-in-Chief, Creative Director, and Liquid-specialist toolkit for the OneHead Hair Solutions storefront (hairso...",
@@ -28,7 +31,8 @@
     "developerName": "Vincent Laroche",
     "category": "Developer Tools",
     "capabilities": [
-      "Skills"
+      "Skills",
+      "MCP"
     ],
     "defaultPrompt": [
       "Use shopify-theme-dev for this task."

@@ -1,11 +1,17 @@
 {
-  "mcpServers": {},
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@1.2.0"]
+    }
+  },
 
-  "_note": "The connectors this plugin relies on are managed/remote Cowork connectors that the user enables in Settings -> Capabilities, not stdio servers this plugin can launch. They are therefore documented here for discovery rather than declared with a launch command. No tokens are stored in this file.",
+  "_note": "chrome-devtools is a real stdio MCP server bundled with this plugin for the /design-check QA step (screenshots, Lighthouse, console/network inspection at mobile breakpoints). Everything in _expectedConnectors below is a managed/remote Cowork connector the user enables in Settings -> Capabilities, not a stdio server this plugin can launch — documented here for discovery. No tokens are stored in this file.",
 
   "_expectedConnectors": [
     {
       "capability": "notion",
+      "default": true,
       "usedBy": ["skills/notion-sections-tracker", "commands/sync-sections.md", "agents/notion-sync.md", "agents/section-builder.md"],
       "tools": ["notion-query-database-view", "notion-search", "notion-fetch", "notion-update-page"],
       "fallback": "Notion REST API v1 via scripts/notion_fetch.py and scripts/notion_update.py with a user-supplied NOTION_TOKEN env var.",
@@ -13,14 +19,33 @@
     },
     {
       "capability": "shopify-admin",
+      "default": true,
       "usedBy": ["agents/section-builder.md", "skills/cloudinary-assetlink"],
       "tools": ["search_products", "get-product", "update-product", "get-collection", "graphql_query", "graphql_mutation", "graphql_schema"],
       "note": "Referenced by capability, not by a session-specific connector id. Used for verifying AssetLink metafield namespaces/keys and product/collection data; destructive operations require explicit user approval."
     },
     {
+      "capability": "cloudinary-asset-management",
+      "default": true,
+      "usedBy": ["skills/cloudinary-assetlink", "commands/cloudinary-url.md", "agents/section-builder.md"],
+      "tools": [
+        "search-assets", "visual-search-assets", "list-images", "list-videos", "list-files",
+        "search-folders", "create-folder", "move-folder", "delete-folder",
+        "get-asset-details", "asset-update", "asset-rename",
+        "upload-asset", "transform-asset",
+        "create-asset-relations", "delete-asset-relations",
+        "list-tags", "get-usage-details", "get-tx-reference",
+        "generate-archive", "download-asset-backup",
+        "delete-asset", "delete-derived-assets"
+      ],
+      "target": "Cloudinary cloud dtmizxj1n",
+      "note": "Cowork-managed Cloudinary Asset Management connector — primary tool for finding/uploading/organizing media in marketing/, products/, pages/ (and ad-hoc folders like 'hairloss'). Search and list operations need no API key. Treat delete-* and move-folder as destructive: confirm with the user before calling."
+    },
+    {
       "capability": "cloudinary",
+      "default": true,
       "usedBy": ["skills/cloudinary-assetlink", "commands/cloudinary-url.md"],
-      "note": "If a dedicated Cloudinary connector is available, use it for upload/transform automation. Otherwise rely on the cloudinary:cloudinary-transformations and cloudinary:cloudinary-docs skills plus scripts/cloudinary_url.py for delivery-URL construction. The AssetLink API key lives in /Users/vMac/.env and is never embedded here."
+      "note": "Main Cloudinary connector/skills (cloudinary:cloudinary-docs, cloudinary:cloudinary-transformations) for building and debugging delivery-URL transformations (f_auto, q_auto, t_hsc_* named transforms). Use alongside cloudinary-asset-management and scripts/cloudinary_url.py. The AssetLink API key lives in /Users/vMac/.env and is only needed for raw Admin API calls outside these MCP tools."
     }
   ]
 }

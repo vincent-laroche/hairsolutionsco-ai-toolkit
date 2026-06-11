@@ -53,14 +53,25 @@ This makes `git push origin main` work from any environment, including ephemeral
 
 ## FUSE sandbox lock-file quirk
 
-The sandbox's FUSE mount sometimes can't `unlink()` git lock files — `.git/index.lock`, `.git/HEAD.lock`, `.git/refs/**/*.lock`, `.git/packed-refs.lock` — and returns EPERM **even though the underlying git operation (commit/push/branch) usually succeeded anyway.** Symptoms: "Another git process seems to be running… remove the file manually to continue", "File exists", "Unable to create … .lock".
+The sandbox's FUSE mount sometimes can't `unlink()` git lock files — `.git/index.lock`, `.git/HEAD.lock`, `.git/refs/**/*.lock`, `.git/packed-refs.lock`, `.git/objects/maintenance.lock*` — and returns EPERM **even though the underlying git operation (commit/push/branch) usually succeeded anyway.** Symptoms: "Another git process seems to be running… remove the file manually to continue", "File exists", "Unable to create … .lock".
 
 Fix order:
 1. **`mv` the lock file aside** within the same directory (`mv .git/index.lock .git/index.lock.bak`) — rename often works where `rm`/unlink doesn't — then retry the failing git command.
 2. If `mv` also fails, ask the user to `rm -f <path-to-lock>` on their real Mac terminal (no restriction there).
 3. **Never touch `.git/worktrees/*/HEAD.lock`** — those belong to other active sessions/worktrees.
 
-`scripts/git_safe_commit_push.sh` and the `/fix-git-locks` command encode this retry behavior. General `rm`/unlink of tracked files is also unreliable in the sandbox — prefer Edit/Write to overwrite.
+`scripts/git_safe_commit_push.sh` and the `/fix-git-locks` command encode this retry behavior, including a sweep for leftover `*.lock.bak` / `leftover_*` / `_writetest*` residue from earlier `mv`-aside attempts (cosmetic — git ignores `.git/` internals and the whitelist `.gitignore` keeps stray top-level files untracked, but `/fix-git-locks` will print a consolidated `rm -f` for the user's real terminal if asked). General `rm`/unlink of tracked **or untracked** files is unreliable in the sandbox for *any* repo on this mount, not just `.git/` — prefer Edit/Write to overwrite, and avoid `git add -A` if stray undeletable scratch files exist (use explicit paths instead).
+
+## Cowork bash path mapping
+
+Cowork's `mcp__workspace__bash` runs in a separate Linux sandbox. The paths the **Read/Write/Edit tools** see (e.g. `/Users/vMac/06_storefront/...`) are NOT the paths **bash** sees — bash mounts each connected folder under `/sessions/<session-id>/mnt/<folder-name>/`. Concretely:
+
+| File-tool path (Read/Write/Edit) | Bash path |
+|---|---|
+| `/Users/vMac/06_storefront/...` | `/sessions/<session-id>/mnt/06_storefront/...` |
+| `/Users/vMac/03_agents/hairsolutionsco-ai-toolkit/...` | `/sessions/<session-id>/mnt/hairsolutionsco-ai-toolkit/...` |
+
+The `<session-id>` segment changes per session — read it from the current session's "Shell access" mapping (shown in the system prompt) rather than hardcoding one. When running `scripts/git_safe_commit_push.sh` or any shell command against the storefront repo, translate the path first; when using Read/Write/Edit, use the `/Users/vMac/...` form. Never assume a sandbox path (`/sessions/...`) is meaningful to the user or to file tools, and never expose `/sessions/...` paths to the user.
 
 ## Safety rules
 
