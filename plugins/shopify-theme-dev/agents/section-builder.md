@@ -20,7 +20,10 @@ You implement a single storefront change end to end, production-ready, and ship 
 
 5. **Ship.** Run the `/ship` flow: validate, commit with a conventional message, push to `origin main` via `git_safe_commit_push.sh` (handle lock files with `/fix-git-locks`), and verify `HEAD == origin/main`. Never push partial/broken work; never touch product/order/checkout/billing/app files unless explicitly asked.
 
-6. **Update Notion (if sourced from a row).** Via `notion-update-page` (or `scripts/notion_update.py`): check `Changes Applied`, clear the applied "Desired …" field(s), set `Status` (e.g. "In review"), and append to `Claude Notes / Blockers` what changed and where — **file + commit hash**.
+6. **Update Notion (if sourced from a row).** Follow `notion-sections-tracker`'s "Update procedure after implementing" via `notion-update-page` (or `scripts/notion_update.py`):
+   - **Re-derive `Full Section Text`** from the file as it now exists — a complete fresh snapshot of every visible string (headline, body, every CTA/button label, proof/meta lines), not a patch of just the requested edit. **Any structural change (button/block/image added or removed) must be reflected here**: a removed CTA's "CTA N: ..." line is deleted from `Full Section Text`, a new one is added.
+   - Check `Changes Applied` → `true`, clear the applied "Desired …" field(s), set `Status` (e.g. "In review").
+   - Append to `Claude Notes / Blockers` what changed and where — **file + commit hash** — and call out any structural (non-text) changes explicitly.
 
 ## Final report
-List: files changed, brand/SEO checks performed, commit hash, push status (HEAD vs origin/main), Notion row updated (y/n), and any remaining production risk.
+List: files changed, brand/SEO checks performed, commit hash, push status (HEAD vs origin/main), Notion row updated (y/n) **including whether `Full Section Text` was re-synced to match structural changes**, and any remaining production risk.

@@ -28,9 +28,9 @@ He adds/edits rows between sessions. Check it proactively whenever he says "cont
 | `Template / JSON Template` | rich_text |
 | `Full Section Text` | rich_text |
 | `Desired Section Changes` | rich_text |
-| `Desired Section Changes — Mobile Version` | rich_text |
+| `Desired Section Changes - Mobile Version` | rich_text |
 | `Desired Text Typography Changes` | rich_text |
-| `Desired Text Typography Changes — Mobile Version` | rich_text |
+| `Desired Text Typography Changes - Mobile Version` | rich_text |
 | `Changes Applied` | checkbox |
 | `Status` | status |
 | `QA Status` | status / select |
@@ -45,7 +45,7 @@ He adds/edits rows between sessions. Check it proactively whenever he says "cont
 
 ## Pending-row rule
 
-A row is **pending** when **any "Desired …" field is non-empty AND `Changes Applied` is unchecked.** The four "Desired …" fields are: `Desired Section Changes`, `Desired Section Changes — Mobile Version`, `Desired Text Typography Changes`, `Desired Text Typography Changes — Mobile Version`.
+A row is **pending** when **any "Desired …" field is non-empty AND `Changes Applied` is unchecked.** The four "Desired …" fields are: `Desired Section Changes`, `Desired Section Changes - Mobile Version`, `Desired Text Typography Changes`, `Desired Text Typography Changes - Mobile Version`.
 
 ## Access pattern
 
@@ -68,9 +68,12 @@ So trace: open `templates/index.json`, find the section whose `type` matches the
 
 Once the change is committed & pushed (see `git-ship-workflow`), update the row via `notion-update-page` (or `scripts/notion_update.py`):
 
-1. Check `Changes Applied` → `true`.
-2. Clear the applied "Desired …" field(s) (set to empty).
-3. Set `Status` (e.g. "In review").
-4. Append a short note to `Claude Notes / Blockers` describing what changed and where — **file + commit hash**.
+1. **Re-derive `Full Section Text` from the file as it now exists** — read the section's actual settings/blocks *after* your edit and write out a fresh, complete snapshot of every visible string (headline, intro/body, every CTA/button label, proof/meta lines, etc.). Do **not** patch only the lines mentioned in the "Desired …" fields — `Full Section Text` is a full content snapshot of what's live, not a diff.
+   - **Structural changes are content changes too.** If the implemented change added, removed, or reordered a button, block, image, badge, or any other element, that element's line must be added to or removed from `Full Section Text` accordingly. A removed CTA/button means its "CTA N: ..." line is deleted from `Full Section Text` — leaving it in place describes a button that no longer exists.
+   - When in doubt, regenerate the whole field rather than hand-editing a few words — it's cheap and avoids drift.
+2. Check `Changes Applied` → `true`.
+3. Clear the applied "Desired …" field(s) (set to empty).
+4. Set `Status` (e.g. "In review").
+5. Append a short note to `Claude Notes / Blockers` describing what changed and where — **file + commit hash**. If a structural element (button/block/image) was added or removed, call that out explicitly in the note.
 
 This is the single intake mechanism for Vincent's design/copy requests — don't wait to be asked; check it on "continue".
