@@ -7,12 +7,13 @@ It turns the ad-hoc workflow that's been running in Cowork sessions into somethi
 ## What's inside
 
 **Skills** (auto-load on the right trigger)
-- `hairsolutions-brand` — the v3 design system: OKLCH tokens, Instrument Serif / Geist / Geist Mono, 4px scale, 12-col grid, hairline geometry, the `<em>`/`<i>` gold-accent rule, and the full Always/Never list.
-- `shopify-os2-architecture` — Horizon 3.5.1 section/block/snippet conventions, schema + presets, Liquid/CSS/JS rules, with a worked example from the live `hs-home-band.liquid`.
-- `cloudinary-assetlink` — cloud `dtmizxj1n`, named transforms (`t_hsc_hero|card|thumb|macro_4x5`), responsive/LCP rules, and the AssetLink workflow.
-- `notion-sections-tracker` — the "Sections" database schema, pending rule, and trace-before-you-edit guidance.
-- `git-ship-workflow` — local → commit → push-to-`main` (goes live), HTTPS+PAT auth, and the FUSE lock-file fix.
-- `seo-engagement-checklist` — headings, metadata, JSON-LD by page type, Core Web Vitals, internal linking, engagement within brand rules.
+- `storefront-preflight` — read-only repo/branch/worktree/dev-server diagnostics to run at the start of storefront work.
+- `storefront-build` — Horizon 3.5.1 section/block/snippet conventions (schema + presets, Liquid/CSS/JS rules) plus the v3 design system: OKLCH tokens, Instrument Serif / Geist / Geist Mono, 4px scale, 12-col grid, hairline geometry, and the `<em>`/`<i>` gold-accent rule. Routes to the external design skills for customer-facing work.
+- `storefront-review` — findings-first design / SEO / accessibility / performance / release review: headings, metadata, JSON-LD by page type, Core Web Vitals, internal linking, engagement within brand rules.
+- `storefront-release` — local → commit → push-to-`main` (goes live) routed through the guarded `storefront_release.sh`; never raw `git push`.
+- `cloudinary-media` — cloud `dtmizxj1n`, named transforms (`t_hsc_hero|card|thumb|macro_4x5`), responsive/LCP rules, and the AssetLink workflow.
+- `notion-sections` — read-only "Sections" tracker access: schema verification, pending rule, paginated reads, trace-before-you-edit.
+- `fix-git-locks` — clear stale `.git/*.lock` files the FUSE sandbox couldn't unlink (separate from release; never auto-runs).
 
 **Commands**
 - `/sync-sections [page]` — list pending design/copy changes from Notion.
@@ -27,18 +28,18 @@ It turns the ad-hoc workflow that's been running in Cowork sessions into somethi
 - `seo-auditor` — audits a page/template and emits a prioritized punch list.
 - `notion-sync` — read-only pending-changes summary at session start.
 
-**Scripts** (`scripts/`) — `notion_fetch.py`, `notion_update.py` (REST fallback for the Notion MCP), `git_safe_commit_push.sh` (lock-file-aware push), `cloudinary_url.py` (delivery-URL builder).
+**Scripts** (`scripts/`) — `storefront_preflight.py` (read-only diagnostics), `storefront_release.sh` (staged `preflight`/`validate`/`commit`/`push`/`verify`/`ship` release automation), `session_preflight.py` / `post_edit_validate.py` / `pre_command_guard.py` (hook drivers), `notion_fetch.py` / `notion_update.py` (REST fallback for the Notion MCP), `git_safe_commit_push.sh` (lock-file-aware push), `cloudinary_url.py` (delivery-URL builder).
 
-**Hooks** (`hooks/hooks.json`) — a PreToolUse gate that validates changed Liquid/schema/JSON before a push/commit, and a PostToolUse reminder to run `/design-check` after editing a section/block/template.
+**Hooks** (`hooks/hooks.json`, Claude Code/Cowork schema) — `SessionStart` runs a concise storefront preflight (scoped to the storefront workspace); `PostToolUse` on `Edit|Write|MultiEdit` runs fast validation only when the edit targets the storefront; `PreToolUse` on `Bash` blocks direct `shopify theme push|publish|delete`, destructive raw pulls, `npm run push`, and raw production `git push` that bypasses the release script.
 
-**References** (`references/`) — `Design.md`, `tokens.css` (authoritative tokens), `AGENTS.md`, `homepage-map.md` (condensed homepage section→file map), and `notion-schema.json` (cached schema for drift detection).
+**References** (`references/`) — `Design.md`, `tokens.css` (authoritative tokens), `AGENTS.md`, `homepage-map.md` (condensed homepage section→file map), `notion-schema.json` (cached schema for drift detection), and `paths.json` (machine-readable canonical paths/config).
 
 **MCP** (`.mcp.json`) — bundles the official **`chrome-devtools-mcp`** server (`mcp__chrome-devtools__*`) for the live-QA step in `/design-check`: screenshots and console/network/Lighthouse checks at 320–1440px breakpoints. No setup needed beyond Node/npx being available.
 
 ## Assumptions
 
 - The storefront repo is connected at `/Users/vMac/06_storefront` (required for the git workflow; `main` is Shopify-synced).
-- A **GitHub PAT** is configured per the `git-ship-workflow` skill (gitignored `.git-credentials`, HTTPS remote). Pushes go live — never ship partial work.
+- A **GitHub PAT** is configured per the `storefront-release` skill (gitignored `.git-credentials`, HTTPS remote). Pushes go live — never ship partial work.
 - A **Notion integration token** is available at runtime as `NOTION_TOKEN` for the REST fallback (the Notion MCP is preferred when connected). Never hardcode it.
 - **Cloudinary** media (cloud `dtmizxj1n`) is managed primarily through the **Cloudinary Asset Management** connector (`search-assets`, `visual-search-assets`, `list-images`, `upload-asset`, `transform-asset`, etc. — see `.mcp.json` `_expectedConnectors`) plus the `cloudinary` connector/skills for delivery-URL transformations. Enable both in **Settings → Capabilities**. The AssetLink API key in `/Users/vMac/.env` is only needed for raw Admin API calls outside these MCP tools.
 

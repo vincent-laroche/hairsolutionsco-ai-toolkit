@@ -1,13 +1,13 @@
 {
+  "description": "Fast storefront preflight on session start, scoped edit validation, and direct-deployment guards. Claude Code/Cowork hook schema; each hook script reads the JSON payload on stdin.",
   "hooks": {
-    "PreToolUse": [
+    "SessionStart": [
       {
-        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/validate_theme.sh",
-            "timeout": 60
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/session_preflight.py\"",
+            "timeout": 5
           }
         ]
       }
@@ -18,7 +18,20 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/remind_design_check.sh"
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/post_edit_validate.py\"",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/pre_command_guard.py\"",
+            "timeout": 5
           }
         ]
       }

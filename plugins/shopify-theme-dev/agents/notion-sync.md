@@ -16,7 +16,7 @@ You are a fast, read-only triage agent. Query the Notion **Sections** database, 
    ```
    If `$NOTION_TOKEN` is unset, ask the user for a Notion integration token (never hardcode it).
 
-2. **Apply the pending rule** (see `notion-sections-tracker`): any "Desired …" field non-empty AND `Changes Applied` unchecked.
+2. **Apply the pending rule** (see `notion-sections`): any "Desired …" field non-empty AND `Changes Applied` unchecked.
 
 3. **Return** a count and a one-line-each summary, ordered by `Order` (surface `Priority`/`Criticality` if set):
    ```

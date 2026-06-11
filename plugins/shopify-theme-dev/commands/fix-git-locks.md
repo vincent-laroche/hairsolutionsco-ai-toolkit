@@ -5,7 +5,7 @@ argument-hint: ""
 
 # /fix-git-locks
 
-Clear stale git lock files in the storefront repo that the FUSE sandbox failed to `unlink()`. Read the `git-ship-workflow` skill's lock-file section first. The underlying git operation has usually already succeeded — these locks are leftovers.
+Clear stale git lock files in the storefront repo that the FUSE sandbox failed to `unlink()`. Read the `storefront-release` skill's lock-file section first. The underlying git operation has usually already succeeded — these locks are leftovers.
 
 ## Steps
 

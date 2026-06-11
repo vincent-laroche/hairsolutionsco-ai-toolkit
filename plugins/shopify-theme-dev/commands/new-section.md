@@ -5,7 +5,7 @@ argument-hint: "<section-name> (e.g. hs-about-story or hs-custom-press-strip)"
 
 # /new-section
 
-Scaffold a production-ready, theme-editor-compatible section. Read the `shopify-os2-architecture` and `hairsolutions-brand` skills first.
+Scaffold a production-ready, theme-editor-compatible section. Read the `storefront-build` skill first (it covers OS 2.0 architecture and the brand system).
 
 ## Steps
 

@@ -5,7 +5,7 @@ argument-hint: "[page filter, e.g. Home — optional]"
 
 # /sync-sections
 
-Find pending storefront changes in the Notion **Sections** database (ID `18647d9ecc9840e7b884cdf8bf0b15ec`). Read the `notion-sections-tracker` skill first for the schema and pending rule.
+Find pending storefront changes in the Notion **Sections** database (ID `18647d9ecc9840e7b884cdf8bf0b15ec`). Read the `notion-sections` skill first for the schema and pending rule.
 
 ## Steps
 

@@ -5,7 +5,7 @@ argument-hint: "[commit message — optional; auto-generated from the diff if om
 
 # /ship
 
-Commit and push the current storefront changes to `origin main`. **`main` is Shopify-synced — this goes live.** Read the `git-ship-workflow` skill first. Never ship partial or broken work.
+Commit and push the current storefront changes to `origin main`. **`main` is Shopify-synced — this goes live.** Read the `storefront-release` skill first. Never ship partial or broken work.
 
 ## Steps
 

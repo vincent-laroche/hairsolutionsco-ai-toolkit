@@ -8,3 +8,4 @@ Thumbs.db
 
 # Node (in case a plugin adds tooling)
 node_modules/
+.backups/

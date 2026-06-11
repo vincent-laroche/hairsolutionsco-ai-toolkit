@@ -13,7 +13,7 @@ Review a `.liquid` section/template against the brand system, the architecture r
 
 2. **Run `design:design-critique`** against the file for hierarchy, consistency, and usability feedback.
 
-3. **Brand check** against the `hairsolutions-brand` skill:
+3. **Brand check** against the `storefront-build` skill:
    - Colors are OKLCH tokens, not inline hex; backgrounds only Off-white / Paper / Obsidian / Obsidian-soft.
    - Type pairing correct (Instrument Serif for Display/H1/H2, Geist H3↓ and UI, Geist Mono meta); no Instrument Serif under 24px.
    - One accent (Cream **or** Clay) per view, dark surfaces only; never mixed.
@@ -21,12 +21,12 @@ Review a `.liquid` section/template against the brand system, the architecture r
    - Geometry: near-square corners (2–8px), hairline rules, pills only for badges.
    - Walk the **Always / Never** list (§6) and flag every violation.
 
-4. **Architecture check** against `shopify-os2-architecture`:
+4. **Architecture check** against `storefront-build`:
    - `presets` present; `{{ block.shopify_attributes }}` preserved; stable setting IDs.
    - `{% liquid %}` for multi-line logic; no `all_products`/`collections.all` in loops; loops >20 paginated; nullable objects guarded; `.value` for metafields; merchant text escaped.
    - Grid/Flexbox only; `clamp()`/`%`/`fr` containers; `text-wrap` balance/pretty; vanilla JS; `IntersectionObserver`; `defer`/`type="module"`.
 
-5. **SEO check** against `seo-engagement-checklist` (where relevant): one `<h1>`, heading order, landmarks, descriptive links, image `loading`/`fetchpriority`/`width`/`height`/`alt`, JSON-LD for the page type, internal links, no urgency language.
+5. **SEO check** against `storefront-review` (where relevant): one `<h1>`, heading order, landmarks, descriptive links, image `loading`/`fetchpriority`/`width`/`height`/`alt`, JSON-LD for the page type, internal links, no urgency language.
 
 6. **Mobile** — sanity-check 320 / 375 / 390 / 430px behavior and the spacing halving.
 

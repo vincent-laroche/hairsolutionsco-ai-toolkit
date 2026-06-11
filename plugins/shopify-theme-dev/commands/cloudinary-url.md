@@ -5,7 +5,7 @@ argument-hint: "<public-id> <use: hero|card|thumb|macro|custom> [custom transfor
 
 # /cloudinary-url
 
-Construct a brand-correct Cloudinary delivery URL for cloud `dtmizxj1n` and emit a ready-to-paste responsive `<img>`. Read the `cloudinary-assetlink` skill for the named-transformation table and rules.
+Construct a brand-correct Cloudinary delivery URL for cloud `dtmizxj1n` and emit a ready-to-paste responsive `<img>`. Read the `cloudinary-media` skill for the named-transformation table and rules.
 
 ## Steps
 

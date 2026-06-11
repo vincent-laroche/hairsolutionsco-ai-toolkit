@@ -1,81 +1,124 @@
 #!/usr/bin/env python3
-"""
-cloudinary_url.py — build Hair Solutions Co. Cloudinary delivery URLs.
+"""Build secret-free Cloudinary delivery URLs and responsive markup."""
 
-Cloud name: dtmizxj1n  ·  Delivery host: https://res.cloudinary.com/dtmizxj1n
-Always injects f_auto,q_auto,dpr_auto. Can emit a srcset across a width list.
-No API key required for delivery-URL construction.
+from __future__ import annotations
 
-Usage:
-    python3 cloudinary_url.py --public-id products/mens-lace-system-7/hero \
-        --transform t_hsc_hero --widths 768,1280,1600,2200 --srcset
-
-    python3 cloudinary_url.py --public-id pages/about/studio-bench \
-        --transform "c_fill,g_auto,ar_4:5"            # raw transform, single URL
-"""
 import argparse
+import html
+import json
+import os
+import re
+from urllib.parse import quote
 
-CLOUD = "dtmizxj1n"
-HOST = f"https://res.cloudinary.com/{CLOUD}"
-ALWAYS = ["f_auto", "q_auto", "dpr_auto"]
-
-# Convenience aliases for the named transforms (also valid as bare named transforms).
-NAMED = {
-    "hero": "t_hsc_hero",
-    "card": "t_hsc_card",
-    "thumb": "t_hsc_thumb",
-    "macro": "t_hsc_macro_4x5",
-}
+DEFAULT_CLOUD = "dtmizxj1n"
+SAFE_TRANSFORM = re.compile(r"^[A-Za-z0-9_!:$,./-]+$")
 
 
-def build_transform(transform: str, width: int | None) -> str:
-    """Combine the (named or raw) transform with the always-on params and an optional width."""
-    transform = NAMED.get(transform, transform)  # map shorthand -> t_hsc_*
-    parts = []
-    if transform:
-        parts.append(transform)
-    parts.extend(ALWAYS)
-    if width:
-        parts.append(f"w_{width}")
-    return ",".join(parts)
+def clean_public_id(value: str) -> str:
+    value = value.strip().lstrip("/")
+    if not value or ".." in value.split("/"):
+        raise ValueError("public ID must be non-empty and cannot contain '..'")
+    return "/".join(quote(part, safe="@:_-.,") for part in value.split("/"))
 
 
-def url_for(public_id: str, transform: str, width: int | None = None,
-            resource: str = "image") -> str:
-    public_id = public_id.lstrip("/")
-    return f"{HOST}/{resource}/upload/{build_transform(transform, width)}/{public_id}"
+def clean_transform(value: str) -> str:
+    value = value.strip().strip("/")
+    if not value or not SAFE_TRANSFORM.fullmatch(value):
+        raise ValueError(f"unsafe transformation: {value!r}")
+    return value
 
 
-def main():
-    ap = argparse.ArgumentParser(description="Build a Cloudinary delivery URL.")
-    ap.add_argument("--public-id", required=True,
-                    help="e.g. products/mens-lace-system-7/hero")
-    ap.add_argument("--transform", default="",
-                    help="Named transform (t_hsc_hero|card|thumb|macro_4x5), shorthand "
-                         "(hero|card|thumb|macro), or a raw param string (c_fill,g_auto,ar_4:5).")
-    ap.add_argument("--widths", default="",
-                    help="Comma-separated widths for a srcset, e.g. 768,1280,1600,2200")
-    ap.add_argument("--srcset", action="store_true",
-                    help="Emit a srcset (requires --widths).")
-    ap.add_argument("--resource", default="image", choices=["image", "video"])
-    args = ap.parse_args()
+def build_url(
+    public_id: str,
+    cloud_name: str = DEFAULT_CLOUD,
+    transforms: list[str] | None = None,
+    width: int | None = None,
+    height: int | None = None,
+    crop: str = "limit",
+    dpr_auto: bool = False,
+) -> str:
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", cloud_name):
+        raise ValueError("invalid cloud name")
+    if width is not None and width <= 0:
+        raise ValueError("width must be positive")
+    if height is not None and height <= 0:
+        raise ValueError("height must be positive")
+    parts: list[str] = []
+    if width or height:
+        if crop not in {"limit", "fill", "fit", "scale", "thumb", "crop"}:
+            raise ValueError("unsupported crop mode")
+        resize = [f"c_{crop}"]
+        if height:
+            resize.append(f"h_{height}")
+        if width:
+            resize.append(f"w_{width}")
+        parts.append(",".join(resize))
+    parts.extend(clean_transform(item) for item in (transforms or []))
+    if dpr_auto:
+        parts.append("dpr_auto")
+    parts.extend(["f_auto", "q_auto"])
+    path = "/".join(parts)
+    return (
+        f"https://res.cloudinary.com/{cloud_name}/image/upload/"
+        f"{path}/{clean_public_id(public_id)}"
+    )
 
-    widths = [int(w) for w in args.widths.split(",") if w.strip()] if args.widths else []
 
-    if args.srcset and widths:
-        lines = [f"{url_for(args.public_id, args.transform, w, args.resource)} {w}w"
-                 for w in widths]
-        print("srcset:")
-        print(",\n".join(lines))
-        # A sensible default src = largest width.
-        print("\nsrc:")
-        print(url_for(args.public_id, args.transform, max(widths), args.resource))
-    elif widths:
-        for w in widths:
-            print(url_for(args.public_id, args.transform, w, args.resource))
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("public_id")
+    parser.add_argument("--cloud-name", default=os.getenv("CLOUDINARY_CLOUD_NAME", DEFAULT_CLOUD))
+    parser.add_argument("--transform", action="append", default=[])
+    parser.add_argument("--named-transform")
+    parser.add_argument("--width", type=int)
+    parser.add_argument("--height", type=int)
+    parser.add_argument("--widths", help="comma-separated responsive widths")
+    parser.add_argument("--crop", default="limit")
+    parser.add_argument("--dpr-auto", action="store_true")
+    parser.add_argument("--output", choices=("url", "json", "html"), default="url")
+    parser.add_argument("--alt", default="")
+    parser.add_argument("--sizes", default="100vw")
+    parser.add_argument("--hero", action="store_true")
+    args = parser.parse_args()
+
+    transforms = list(args.transform)
+    if args.named_transform:
+        transforms.insert(0, f"t_{args.named_transform}")
+    widths = [int(v.strip()) for v in args.widths.split(",")] if args.widths else []
+    if any(width <= 0 for width in widths):
+        parser.error("responsive widths must be positive")
+    widths = sorted(set(widths))
+    url = build_url(
+        args.public_id, args.cloud_name, transforms, args.width, args.height,
+        args.crop, args.dpr_auto
+    )
+    srcset = [
+        f"{build_url(args.public_id, args.cloud_name, transforms, width, args.height, args.crop, args.dpr_auto)} {width}w"
+        for width in widths
+    ]
+    data = {"url": url, "srcset": srcset}
+    if args.output == "json":
+        print(json.dumps(data, indent=2))
+    elif args.output == "html":
+        attrs = [
+            f'src="{html.escape(url, quote=True)}"',
+            f'alt="{html.escape(args.alt, quote=True)}"',
+            f'sizes="{html.escape(args.sizes, quote=True)}"',
+            'loading="eager"' if args.hero else 'loading="lazy"',
+            'fetchpriority="high"' if args.hero else 'fetchpriority="auto"',
+            'decoding="sync"' if args.hero else 'decoding="async"',
+        ]
+        if srcset:
+            attrs.append(f'srcset="{html.escape(", ".join(srcset), quote=True)}"')
+        if args.width:
+            attrs.append(f'width="{args.width}"')
+        if args.height:
+            attrs.append(f'height="{args.height}"')
+        print("<img " + " ".join(attrs) + ">")
     else:
-        print(url_for(args.public_id, args.transform, None, args.resource))
+        print(url)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

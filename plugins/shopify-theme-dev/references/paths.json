@@ -1,0 +1,14 @@
+{
+  "storefront_repo": "/Users/vMac/06_storefront",
+  "wrapper_workspace": "/Users/vMac/Documents/Shopify Theme Dev",
+  "storefront_agents": "/Users/vMac/06_storefront/AGENTS.md",
+  "product_contract": "/Users/vMac/06_storefront/PRODUCT.md",
+  "design_contract": "/Users/vMac/06_storefront/DESIGN.md",
+  "design_system_html": "/Users/vMac/06_storefront/Brand Identity/Hair Solutions Co - Master Design System/Hair Solutions Co - Design System v3.html",
+  "design_system_css": "/Users/vMac/06_storefront/Brand Identity/Hair Solutions Co - Master Design System/styles/system-v3.css",
+  "design_tokens": "/Users/vMac/06_storefront/Brand Identity/Hair Solutions Co - Master Design System/styles/tokens.css",
+  "expected_branch": "main",
+  "expected_origin": "https://github.com/vincent-laroche/storefront.git",
+  "public_url": "https://hairsolutions.co",
+  "dev_url": "http://127.0.0.1:9292"
+}
