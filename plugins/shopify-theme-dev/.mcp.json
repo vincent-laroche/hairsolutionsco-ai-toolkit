@@ -1,0 +1,26 @@
+{
+  "mcpServers": {},
+
+  "_note": "The connectors this plugin relies on are managed/remote Cowork connectors that the user enables in Settings -> Capabilities, not stdio servers this plugin can launch. They are therefore documented here for discovery rather than declared with a launch command. No tokens are stored in this file.",
+
+  "_expectedConnectors": [
+    {
+      "capability": "notion",
+      "usedBy": ["skills/notion-sections-tracker", "commands/sync-sections.md", "agents/notion-sync.md", "agents/section-builder.md"],
+      "tools": ["notion-query-database-view", "notion-search", "notion-fetch", "notion-update-page"],
+      "fallback": "Notion REST API v1 via scripts/notion_fetch.py and scripts/notion_update.py with a user-supplied NOTION_TOKEN env var.",
+      "target": "Sections database 18647d9ecc9840e7b884cdf8bf0b15ec"
+    },
+    {
+      "capability": "shopify-admin",
+      "usedBy": ["agents/section-builder.md", "skills/cloudinary-assetlink"],
+      "tools": ["search_products", "get-product", "update-product", "get-collection", "graphql_query", "graphql_mutation", "graphql_schema"],
+      "note": "Referenced by capability, not by a session-specific connector id. Used for verifying AssetLink metafield namespaces/keys and product/collection data; destructive operations require explicit user approval."
+    },
+    {
+      "capability": "cloudinary",
+      "usedBy": ["skills/cloudinary-assetlink", "commands/cloudinary-url.md"],
+      "note": "If a dedicated Cloudinary connector is available, use it for upload/transform automation. Otherwise rely on the cloudinary:cloudinary-transformations and cloudinary:cloudinary-docs skills plus scripts/cloudinary_url.py for delivery-URL construction. The AssetLink API key lives in /Users/vMac/.env and is never embedded here."
+    }
+  ]
+}

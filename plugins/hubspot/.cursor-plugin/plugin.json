@@ -1,0 +1,23 @@
+{
+  "name": "hubspot",
+  "displayName": "HubSpot (Hair Solutions Co.)",
+  "version": "1.0.0",
+  "description": "Hair Solutions HubSpot skills for CRM model, business operations, UI how-to, developer workflows, AI references, and customer SITREP work.",
+  "author": {
+    "name": "Hair Solutions Co.",
+    "email": "vincent@hairsolutions.co"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hubspot",
+    "crm",
+    "breeze",
+    "agent-tools",
+    "custom-channels",
+    "sitrep",
+    "hair-solutions",
+    "skills",
+    "mcp"
+  ],
+  "logo": "assets/app-icon.png"
+}

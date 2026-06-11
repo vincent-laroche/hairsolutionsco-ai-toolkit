@@ -1,0 +1,92 @@
+{
+  "name": "hairsolutionsco",
+  "owner": {
+    "name": "Vincent Laroche"
+  },
+  "metadata": {
+    "description": "Hair Solutions Co. AI toolkit — agents, skills, and commands for Claude, Cursor, and other AI apps."
+  },
+  "plugins": [
+    {
+      "name": "ai-video",
+      "source": "./plugins/ai-video",
+      "description": "AI-powered video creation and management: HeyGen avatar video generation, video content strategy with Video-Cog, and Mux video infrastructure for streaming.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Hair Solutions Co."
+      }
+    },
+    {
+      "name": "analytics-ads",
+      "source": "./plugins/analytics-ads",
+      "description": "Analytics and advertising intelligence: Google Analytics 4 reporting, Google Tag Manager implementation, and Google Ads Scripts automation for data-driven growth.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Hair Solutions Co."
+      }
+    },
+    {
+      "name": "business-integrations",
+      "source": "./plugins/business-integrations",
+      "description": "Connect and automate HubSpot CRM, Notion workspace, Instagram, n8n workflows, and 1000+ apps via Composio. Essential stack for Hair Solutions Co. operations.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Hair Solutions Co."
+      }
+    },
+    {
+      "name": "hubspot",
+      "source": "./plugins/hubspot",
+      "description": "HubSpot for Hair Solutions Co. — split into focused skills: CRM data model, business operations & automation strategy, developer integrations (Agent Tools, Breeze, Custom Channels), and step-by-step UI how-to procedures.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Hair Solutions Co"
+      }
+    },
+    {
+      "name": "marketing-content",
+      "source": "./plugins/marketing-content",
+      "description": "Full-stack marketing suite: social media, paid ads, SEO, email sequences, copywriting, and content research. Built for e-commerce and service business growth.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Hair Solutions Co."
+      }
+    },
+    {
+      "name": "shopify-design",
+      "source": "./plugins/shopify-design",
+      "description": "Complete Shopify development and design toolkit: Liquid templating, theme development, Shopify API, performance optimization, debugging, UI/UX design system, and Figma automation.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Hair Solutions Co."
+      }
+    },
+    {
+      "name": "shopify-developer",
+      "source": "./plugins/shopify-developer",
+      "description": "Shopify theme development for Hair Solutions Co. — Horizon 3.5.1 Liquid, front-end CSS/JS, and production operations.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Hair Solutions Co"
+      }
+    },
+    {
+      "name": "shopify-liquid-designer",
+      "source": "./plugins/shopify-liquid-designer",
+      "description": "Design-first Shopify theme development for Hair Solutions Co. Design in Figma first, generate production-ready Liquid with floating cards, Horizon theme mastery, Storefront API support, and full UI/UX intelligence.",
+      "version": "0.3.0",
+      "author": {
+        "name": "Hair Solutions Co"
+      }
+    },
+    {
+      "name": "shopify-theme-dev",
+      "source": "./plugins/shopify-theme-dev",
+      "description": "Designer-in-Chief, Creative Director, and Liquid-specialist toolkit for the OneHead Hair Solutions storefront (hairsolutions.co) — brand system, OS 2.0 sections, Cloudinary AssetLink media, Notion change-tracker, and ship-to-main workflow.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Vincent Laroche"
+      }
+    }
+  ]
+}

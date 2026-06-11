@@ -1,0 +1,8 @@
+{
+  "name": "shopify-design",
+  "version": "0.1.0",
+  "description": "Complete Shopify development and design toolkit: Liquid templating, theme development, Shopify API, performance optimization, debugging, UI/UX design system, and Figma automation.",
+  "author": {
+    "name": "Hair Solutions Co."
+  }
+}

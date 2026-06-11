@@ -1,0 +1,21 @@
+{
+  "name": "shopify-liquid-designer",
+  "displayName": "Shopify Liquid Designer (Hair Solutions Co.)",
+  "version": "1.0.0",
+  "description": "Workspace-local Shopify skill bundle for Horizon theme development, Liquid, frontend, metaobjects, APIs, and production safety.",
+  "author": {
+    "name": "Hair Solutions Co.",
+    "email": "vincent@hairsolutions.co"
+  },
+  "license": "MIT",
+  "keywords": [
+    "shopify",
+    "liquid",
+    "horizon",
+    "theme",
+    "metaobjects",
+    "storefront-api",
+    "hair-solutions",
+    "skills"
+  ]
+}
