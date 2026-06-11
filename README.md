@@ -53,14 +53,20 @@ Use `gemini extensions link <plugin-directory>` during local development.
 ## Install (Google Antigravity)
 
 Clone this repository, then run the non-destructive installer for the required
-plugin:
+toolkit:
 
 ```shell
-./scripts/install-antigravity-plugin.sh chrome-devtools-mcp
+# Preview all skill and MCP changes.
+./scripts/install-antigravity-plugin.sh
+
+# Install or update all marketplace plugins.
+./scripts/install-antigravity-plugin.sh --apply
 ```
 
-The installer refuses to replace existing skills and backs up Antigravity's MCP
-configuration before merging new servers.
+The installer namespaces duplicate skill names, adopts identical existing
+skills, preserves local modifications, backs up Antigravity's MCP configuration
+before writing, and reports same-name MCP conflicts without exposing config
+values.
 
 ## Plugins in this marketplace
 
