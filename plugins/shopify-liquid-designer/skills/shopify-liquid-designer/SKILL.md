@@ -82,6 +82,7 @@ Apply these to every section or component, regardless of explicit request:
 | Focus states | `:focus-visible` on `a`, `button`, `input`, `select` |
 | Mobile-first | Write default CSS for mobile, use `@media (min-width: 768px)` for larger |
 | Spacing rhythm | 8px base unit — use multiples: 8, 16, 24, 32, 48, 64, 80px |
+| Golden Rule Spacing | ONLY Hero and Footer may touch screen edges. All other sections MUST have fixed padding (`var(--home-pad)`) left/right. |
 | Typography | Body minimum 16px / line-height 1.5–1.75 / max 65–75 chars/line |
 | Images | `| image_url: width: X` filter + `loading="lazy"` below fold |
 | Motion | Always include `@media (prefers-reduced-motion: reduce)` guard |

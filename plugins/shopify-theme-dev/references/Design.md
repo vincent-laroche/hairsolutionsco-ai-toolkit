@@ -106,6 +106,10 @@ Two families. **Instrument Serif** carries display and editorial moments (slow, 
 
 4px base unit. 12-column grid, 24px gutters. This is an editorial brand: outer margins, wide gutters, and negative space matter more than tight packing. **Sections breathe at 128px minimum on desktop; halve all section spacing below 768px.**
 
+**Golden Rule Spacing Policy**:
+Every section MUST have fixed, equal horizontal padding (`var(--home-pad)`) across the entire width of the screen, especially on mobile. Elements must never bleed to the edge of the viewport.
+**Exceptions**: ONLY the Homepage Hero and the Footer are allowed to touch the left and right borders of the screen. All other sections (including cards, stats, grids, and text blocks) must be constrained by this Golden Rule padding.
+
 ```css
 :root {
   --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;

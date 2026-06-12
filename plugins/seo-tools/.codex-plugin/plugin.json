@@ -1,0 +1,26 @@
+{
+  "name": "seo-tools",
+  "version": "0.1.0",
+  "description": "SEO and Google Search Console tools for Hair Solutions Co.",
+  "author": {
+    "name": "Hair Solutions Co."
+  },
+  "homepage": "https://hairsolutions.co",
+  "repository": "https://github.com/vincent-laroche/hairsolutionsco-ai-toolkit/tree/main/plugins/seo-tools",
+  "license": "Proprietary",
+  "keywords": [],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Seo Tools",
+    "shortDescription": "SEO and Google Search Console tools for Hair Solutions Co.",
+    "longDescription": "SEO and Google Search Console tools for Hair Solutions Co.",
+    "developerName": "Hair Solutions Co.",
+    "category": "Productivity",
+    "capabilities": [
+      "Skills"
+    ],
+    "defaultPrompt": [
+      "Use seo-tools for this task."
+    ]
+  }
+}
