@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 
 # macOS / Windows
-.DS_Store
+.DS_Store*
 Thumbs.db
 
 # Node (in case a plugin adds tooling)

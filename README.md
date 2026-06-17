@@ -102,6 +102,13 @@ Root marketplace catalogs:
 
 ```
 hairsolutionsco-ai-toolkit/
+├── Brand/
+│   ├── design-system/
+│   │   ├── master/
+│   │   └── reference/
+│   └── logos/
+│       ├── current/
+│       └── archive/
 ├── .claude-plugin/
 │   └── marketplace.json
 ├── .agents/plugins/
