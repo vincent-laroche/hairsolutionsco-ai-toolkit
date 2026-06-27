@@ -2,54 +2,14 @@
   "mcpServers": {
     "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@1.2.0", "--no-usage-statistics"],
-      "env": {
-        "CHROME_DEVTOOLS_MCP_NO_USAGE_STATISTICS": "1",
-        "NO_UPDATE_NOTIFIER": "1"
-      }
+      "args": ["-y", "chrome-devtools-mcp@latest"]
     }
   },
-
-  "_note": "chrome-devtools is a real stdio MCP server bundled with this plugin for the /design-check QA step (screenshots, Lighthouse, console/network inspection at mobile breakpoints). Everything in _expectedConnectors below is a managed/remote Cowork connector the user enables in Settings -> Capabilities, not a stdio server this plugin can launch — documented here for discovery. No tokens are stored in this file.",
-
-  "_expectedConnectors": [
-    {
-      "capability": "notion",
-      "default": true,
-      "usedBy": ["skills/notion-sections", "commands/sync-sections.md", "agents/notion-sync.md", "agents/section-builder.md"],
-      "tools": ["notion-query-database-view", "notion-search", "notion-fetch", "notion-update-page"],
-      "fallback": "Notion REST API v1 via scripts/notion_fetch.py and scripts/notion_update.py with a user-supplied NOTION_TOKEN env var.",
-      "target": "Sections database 18647d9ecc9840e7b884cdf8bf0b15ec"
-    },
-    {
-      "capability": "shopify-admin",
-      "default": true,
-      "usedBy": ["agents/section-builder.md", "skills/cloudinary-media"],
-      "tools": ["search_products", "get-product", "update-product", "get-collection", "graphql_query", "graphql_mutation", "graphql_schema"],
-      "note": "Referenced by capability, not by a session-specific connector id. Used for verifying AssetLink metafield namespaces/keys and product/collection data; destructive operations require explicit user approval."
-    },
-    {
-      "capability": "cloudinary-asset-management",
-      "default": true,
-      "usedBy": ["skills/cloudinary-media", "commands/cloudinary-url.md", "agents/section-builder.md"],
-      "tools": [
-        "search-assets", "visual-search-assets", "list-images", "list-videos", "list-files",
-        "search-folders", "create-folder", "move-folder", "delete-folder",
-        "get-asset-details", "asset-update", "asset-rename",
-        "upload-asset", "transform-asset",
-        "create-asset-relations", "delete-asset-relations",
-        "list-tags", "get-usage-details", "get-tx-reference",
-        "generate-archive", "download-asset-backup",
-        "delete-asset", "delete-derived-assets"
-      ],
-      "target": "Cloudinary cloud dtmizxj1n",
-      "note": "Cowork-managed Cloudinary Asset Management connector — primary tool for finding/uploading/organizing media in marketing/, products/, pages/ (and ad-hoc folders like 'hairloss'). Search and list operations need no API key. Treat delete-* and move-folder as destructive: confirm with the user before calling."
-    },
-    {
-      "capability": "cloudinary",
-      "default": true,
-      "usedBy": ["skills/cloudinary-media", "commands/cloudinary-url.md"],
-      "note": "Main Cloudinary connector/skills (cloudinary:cloudinary-docs, cloudinary:cloudinary-transformations) for building and debugging delivery-URL transformations (f_auto, q_auto, t_hsc_* named transforms). Use alongside cloudinary-asset-management and scripts/cloudinary_url.py. The AssetLink API key lives in /Users/vMac/.env and is only needed for raw Admin API calls outside these MCP tools."
-    }
-  ]
+  "_expectedConnectors": {
+    "_comment": "Enable these in Settings -> Capabilities. They are user-level connectors, not bundled here, and carry no secrets in this plugin. Tokens/keys are read at runtime from /Users/vMac/.env via Desktop Commander.",
+    "notion": "Content (Help Center / blog source). Sections tracker is retired.",
+    "cloudinary": "Cloudinary Asset Management — source of truth for media (cloud dtmizxj1n).",
+    "shopify": "Admin/dev — products, collections, metaobjects, metafields, GraphQL.",
+    "desktop-commander": "Filesystem access beyond the workspace + ALL git operations (FUSE-safe)."
+  }
 }

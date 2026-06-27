@@ -1,57 +1,43 @@
-# shopify-theme-dev
+# shopify-theme-dev (v2.0.0)
 
-A Claude Code / Cowork plugin that packages the **Designer-in-Chief / Creative Director / Shopify Liquid specialist** workflow for the **OneHead Hair Solutions** storefront ([hairsolutions.co](https://hairsolutions.co)) into one installable bundle: skills, slash commands, subagents, scripts, hooks, MCP config, and reference docs.
+Shopify Liquid theme toolkit for the **Hair Solutions Co.** storefront — [hairsolutions.co](https://hairsolutions.co), **Horizon 4.1.1**. Lean by design: thin skills that pull detail from `references/` only when used.
 
-It turns the ad-hoc workflow that's been running in Cowork sessions into something reusable — brand system in your pocket, OS 2.0 section scaffolding, Cloudinary delivery URLs, the Notion change-tracker loop, and a safe ship-to-`main` pipeline.
+## The one law
+**No Shopify CLI. No theme dev server. Ever.** The only deploy path is **local repo → GitHub**. `main` is GitHub-synced and goes live on push; `dev` is the experimental branch.
 
 ## What's inside
 
-**Skills** (auto-load on the right trigger)
-- `storefront-preflight` — read-only repo/branch/worktree/dev-server diagnostics to run at the start of storefront work.
-- `storefront-build` — Horizon 3.5.1 section/block/snippet conventions (schema + presets, Liquid/CSS/JS rules) plus the v3 design system: OKLCH tokens, Instrument Serif / Geist / Geist Mono, 4px scale, 12-col grid, hairline geometry, and the `<em>`/`<i>` gold-accent rule. Routes to the external design skills for customer-facing work.
-- `storefront-review` — findings-first design / SEO / accessibility / performance / release review: headings, metadata, JSON-LD by page type, Core Web Vitals, internal linking, engagement within brand rules.
-- `storefront-release` — local → commit → push-to-`main` (goes live) routed through the guarded `storefront_release.sh`; never raw `git push`.
-- `cloudinary-media` — cloud `dtmizxj1n`, named transforms (`t_hsc_hero|card|thumb|macro_4x5`), responsive/LCP rules, and the AssetLink workflow.
-- `notion-sections` — read-only "Sections" tracker access: schema verification, pending rule, paginated reads, trace-before-you-edit.
-- `fix-git-locks` — clear stale `.git/*.lock` files the FUSE sandbox couldn't unlink (separate from release; never auto-runs).
+**Skills (10)**
+- `storefront-preflight` — read-only session boot: repo, branch, clean tree, dev↔main status.
+- `storefront-build` — write Liquid for Horizon 4.1.1 (single Color Palette) + design system + Definition of Done.
+- `storefront-release` — commit & push to `main` (live) via Desktop Commander; never CLI.
+- `fix-git-locks` — clear stale `.git/*.lock` from the FUSE sandbox.
+- `cloudinary-media` — Cloudinary `dtmizxj1n`: AssetLink for products/collections/blogs, Files CDN for pages, delivery URLs.
+- `metaobjects-metafields` — the live metaobject/metafield model + Liquid access rules.
+- `products-collections` — catalog, base types, tag taxonomy, smart-collection rules, product templates.
+- `help-center` — the custom 3-template Help Center (Home / Category / Article).
+- `custom-product-options` — PDP non-variant options (radios/checkboxes/swatches → line-item properties).
+- `custom-order-options-picker` — the advanced `hs-advanced-order-flow` configurator (WIP).
 
-**Commands**
-- `/sync-sections [page]` — list pending design/copy changes from Notion.
-- `/ship [message]` — commit + push to `main` (live) with lock-file safety.
-- `/new-section <name>` — scaffold a brand-correct OS 2.0 section.
-- `/design-check <file>` — design + brand + SEO punch list before shipping.
-- `/cloudinary-url <public-id> <use> [transform]` — build a delivery URL + `<img>`/srcset.
-- `/fix-git-locks` — clear stale `.git/*.lock` files the sandbox couldn't unlink.
+**Agents (3)** — `brand-compliance` (bible: `/Users/vMac/08_brand` + design system), `seo` (on-page + JSON-LD), `mobile-first` (320/375/390/430, severe).
 
-**Agents**
-- `section-builder` — implements one Notion row or ad-hoc brief end to end (trace → build → design-check → ship → update Notion).
-- `seo-auditor` — audits a page/template and emits a prioritized punch list.
-- `notion-sync` — read-only pending-changes summary at session start.
+**Hooks (3)** — `SessionStart` slim status; `PreToolUse(Bash)` blocks Shopify CLI / dev server / raw `git push`; `PostToolUse(Edit|Write)` non-blocking design-system nudge on theme files.
 
-**Scripts** (`scripts/`) — `storefront_preflight.py` (read-only diagnostics), `storefront_release.sh` (staged `preflight`/`validate`/`commit`/`push`/`verify`/`ship` release automation), `session_preflight.py` / `post_edit_validate.py` / `pre_command_guard.py` (hook drivers), `notion_fetch.py` / `notion_update.py` (REST fallback for the Notion MCP), `git_safe_commit_push.sh` (lock-file-aware push), `cloudinary_url.py` (delivery-URL builder).
+**References** — `theme-map.md`, `cloudinary-map.md`, `metaobjects.md`, and `workflows/sync-dev.yml` (the Dev sync Action).
 
-**Hooks** (`hooks/hooks.json`, Claude Code/Cowork schema) — `SessionStart` runs a concise storefront preflight (scoped to the storefront workspace); `PostToolUse` on `Edit|Write|MultiEdit` runs fast validation only when the edit targets the storefront; `PreToolUse` on `Bash` blocks direct `shopify theme push|publish|delete`, destructive raw pulls, `npm run push`, and raw production `git push` that bypasses the release script.
+**MCP** — bundles `chrome-devtools-mcp` for live QA. Expected connectors (enable in Settings → Capabilities): Notion, Cloudinary, Shopify, Desktop Commander. No secrets are stored in this plugin; tokens are read from `/Users/vMac/.env` at runtime via Desktop Commander.
 
-**References** (`references/`) — `Design.md`, `tokens.css` (authoritative tokens), `AGENTS.md`, `homepage-map.md` (condensed homepage section→file map), `notion-schema.json` (cached schema for drift detection), and `paths.json` (machine-readable canonical paths/config).
+## Dev ↔ main sync (one-way)
+`references/workflows/sync-dev.yml` fast-forwards `dev` to `main` on every push to `main`. It is one-way and safe: if `dev` has diverged it logs a warning and changes nothing.
+**To activate:** copy it to the theme repo at `.github/workflows/sync-dev.yml` and ship to `main` (it only runs once it exists on `main`).
 
-**MCP** (`.mcp.json`) — bundles the official **`chrome-devtools-mcp`** server (`mcp__chrome-devtools__*`) for the live-QA step in `/design-check`: screenshots and console/network/Lighthouse checks at 320–1440px breakpoints. No setup needed beyond Node/npx being available.
+## Install (this machine)
+Settings → Capabilities → add this marketplace folder (`/Users/vMac/03_agents/plugins/shopify-theme-dev`), then enable the `shopify-theme-dev` plugin.
 
-## Assumptions
+## Install (another Claude Desktop) — downloadable
+1. Copy `shopify-theme-dev-plugin.zip` to the other machine and unzip it.
+2. Settings → Capabilities → add the unzipped folder as a plugin marketplace.
+3. Enable `shopify-theme-dev`, then enable the expected connectors above.
+(Or point Capabilities at the GitHub repo if you push this marketplace there.)
 
-- The storefront repo is connected at `/Users/vMac/06_storefront` (required for the git workflow; `main` is Shopify-synced).
-- A **GitHub PAT** is configured per the `storefront-release` skill (gitignored `.git-credentials`, HTTPS remote). Pushes go live — never ship partial work.
-- A **Notion integration token** is available at runtime as `NOTION_TOKEN` for the REST fallback (the Notion MCP is preferred when connected). Never hardcode it.
-- **Cloudinary** media (cloud `dtmizxj1n`) is managed primarily through the **Cloudinary Asset Management** connector (`search-assets`, `visual-search-assets`, `list-images`, `upload-asset`, `transform-asset`, etc. — see `.mcp.json` `_expectedConnectors`) plus the `cloudinary` connector/skills for delivery-URL transformations. Enable both in **Settings → Capabilities**. The AssetLink API key in `/Users/vMac/.env` is only needed for raw Admin API calls outside these MCP tools.
-
-No secrets (PAT, Notion token, Cloudinary key) are stored anywhere in this plugin.
-
-## Quick start
-
-1. `/sync-sections` — see what's pending in the Notion Sections database.
-2. `/new-section hs-custom-about-story` — scaffold a new section (or hand a pending row to the `section-builder` agent).
-3. `/design-check sections/hs-custom-about-story.liquid` — review against brand + architecture + SEO.
-4. `/ship "feat(about): add editorial story section"` — commit + push to `main`; Shopify syncs it live.
-
-## Install
-
-Enable the plugin in **Settings → Capabilities** (point it at this folder / your marketplace). Skills, commands, agents, and hooks are declared in `.claude-plugin/plugin.json` and load automatically.
+Adjust paths in the skills if the other machine uses a different storefront repo location.

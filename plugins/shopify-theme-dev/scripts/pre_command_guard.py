@@ -1,49 +1,37 @@
 #!/usr/bin/env python3
-"""Block direct storefront deployment commands before execution."""
+"""PreToolUse(Bash) guard for the hairsolutions.co storefront.
 
-from __future__ import annotations
+Blocks Shopify CLI deploys and the theme dev server. The deploy path is
+strictly: local repo -> GitHub (main/Dev). Git itself runs through Desktop
+Commander, not Bash, so raw `git push` in Bash is also blocked with a hint.
 
-import json
-import re
-import sys
+Exit 0 = allow. Exit 2 = block (stderr is shown to the model).
+"""
+import json, re, sys
 
-REPO = "/Users/vMac/06_storefront"
-
-
-def deny(reason: str) -> int:
-    print(json.dumps({
-        "hookSpecificOutput": {
-            "hookEventName": "PreToolUse",
-            "permissionDecision": "deny",
-            "permissionDecisionReason": reason,
-        },
-        "systemMessage": reason,
-    }))
-    return 0
-
-
-def main() -> int:
+def main():
     try:
-        payload = json.load(sys.stdin)
-    except (json.JSONDecodeError, EOFError):
-        return 0
-    tool_input = payload.get("tool_input") or {}
-    command = tool_input.get("cmd") or tool_input.get("command") or ""
-    cwd = tool_input.get("workdir") or tool_input.get("cwd") or payload.get("cwd") or ""
-    if not isinstance(command, str) or not (cwd == REPO or cwd.startswith(REPO + "/") or REPO in command):
-        return 0
-    normalized = re.sub(r"\s+", " ", command)
-    blocked = [
-        (r"\bshopify\s+theme\s+(push|publish|delete)\b", "Direct Shopify theme deployment is prohibited."),
-        (r"\bshopify\s+theme\s+pull\b.*\b(--force|--live)\b", "Destructive raw theme pulls require explicit approval."),
-        (r"\bnpm\s+run\s+push\b", "The npm push path is disabled."),
-        (r"(^|[;&|]\s*)git\s+push\b", "Use storefront_release.sh push or ship instead of raw git push."),
-    ]
-    for pattern, reason in blocked:
-        if re.search(pattern, normalized):
-            return deny(reason)
-    return 0
+        data = json.load(sys.stdin)
+    except Exception:
+        sys.exit(0)  # never block on a parse error
+    cmd = (data.get("tool_input") or {}).get("command", "") or ""
+    low = cmd.lower()
 
+    blocked = [
+        (r"\bshopify\s+theme\s+(dev|push|publish|delete|pull|serve)\b",
+         "Shopify CLI theme deploy/dev is forbidden. Use the local repo -> GitHub workflow (storefront-release)."),
+        (r"\bshopify\s+theme\b.*--(live|allow-live)\b",
+         "No CLI publishing to the live theme. Push to GitHub main instead."),
+        (r"\bnpm\s+run\s+(dev|push|deploy|start)\b",
+         "No theme dev server / npm deploy. Local repo -> GitHub only."),
+        (r"\bgit\s+push\b",
+         "Run git through Desktop Commander, not the Bash sandbox (FUSE breaks git locks). Use storefront-release."),
+    ]
+    for pat, msg in blocked:
+        if re.search(pat, low):
+            print(f"[storefront guard] Blocked: {msg}", file=sys.stderr)
+            sys.exit(2)
+    sys.exit(0)
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

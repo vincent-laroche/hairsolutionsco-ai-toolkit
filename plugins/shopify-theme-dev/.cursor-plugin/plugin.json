@@ -1,27 +1,28 @@
 {
   "name": "shopify-theme-dev",
-  "version": "1.1.0",
-  "description": "Designer-in-Chief, Creative Director, and Liquid-specialist toolkit for the OneHead Hair Solutions storefront (hairsolutions.co) — brand system, OS 2.0 sections, Cloudinary AssetLink media, Notion change-tracker, and ship-to-main workflow.",
+  "version": "2.0.0",
+  "description": "Shopify Liquid theme toolkit for the Hair Solutions Co. storefront (hairsolutions.co, Horizon 4.1.1). GitHub-synced Main/Dev release workflow (no Shopify CLI, no dev server), single Color Palette + design system, Cloudinary AssetLink media, metaobjects/metafields, custom product options, the advanced custom-order picker, and the custom Help Center. Includes Brand-Compliance, SEO, and Mobile-First agents.",
   "author": {
     "name": "Vincent Laroche",
-    "email": "vincent.laroche@oneheadhair.com"
+    "email": "info@hairsolutions.co"
   },
+  "homepage": "https://hairsolutions.co",
   "license": "MIT",
   "keywords": [
     "shopify",
     "liquid",
-    "theme",
     "horizon",
     "hairsolutions",
     "cloudinary",
-    "notion",
+    "metaobjects",
+    "metafields",
     "design-system",
     "seo",
-    "chrome-devtools",
-    "qa"
+    "mobile-first",
+    "brand-compliance",
+    "github-sync"
   ],
   "skills": "./skills/",
-  "commands": "./commands/",
   "agents": "./agents/",
   "hooks": "./hooks/hooks.json",
   "mcpServers": "./.mcp.json"

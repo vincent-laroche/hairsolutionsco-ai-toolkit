@@ -1,0 +1,41 @@
+# One-way sync: fast-forward `dev` to `main` on every push to main.
+# Install path in the theme repo: .github/workflows/sync-dev.yml
+# Direction is strictly main -> dev. dev never flows back to main.
+# If dev has diverged (your experiments), it is NOT clobbered — the run
+# logs a warning and makes no change, so you reconcile manually.
+name: Sync dev with main
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-dev
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fast-forward dev to main (one-way, safe)
+        run: |
+          git fetch origin main dev
+          MAIN=$(git rev-parse origin/main)
+          if git merge-base --is-ancestor origin/main origin/dev; then
+            echo "dev already contains main — nothing to do."
+            exit 0
+          fi
+          if git merge-base --is-ancestor origin/dev origin/main; then
+            git push origin "$MAIN:refs/heads/dev"
+            echo "dev fast-forwarded to main ($MAIN)."
+          else
+            echo "::warning::dev has diverged from main — manual reconcile needed. No changes made."
+          fi

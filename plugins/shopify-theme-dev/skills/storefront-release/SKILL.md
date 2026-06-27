@@ -1,21 +1,38 @@
 ---
 name: storefront-release
-description: Use when the user says "ship storefront", "release storefront", "commit and push", "push main", or asks to publish completed GitHub-synced storefront code through the approved Git release workflow.
+description: Commit and push completed hairsolutions.co theme changes. main = live (GitHub-synced). Use when shipping a finished, validated change. Strictly local repo to GitHub — never Shopify CLI or dev server.
 ---
 
-# Storefront Release
+# Storefront release (push = live)
 
-Treat a push to `main` as a production release. Use `../../scripts/storefront_release.sh`; never bypass it with raw `git push`.
+`main` is GitHub-synced to the live theme. A push deploys. Never push partial or unvalidated work.
 
-Required sequence:
+## Preconditions
+- `storefront-preflight` passed: on `main`, clean intent, no active rebase.
+- Definition of Done checklist from `storefront-build` passed for every changed section/block.
+- Changes are inside `/Users/vMac/06_storefront/shopify_github_synched_theme_files`.
 
-1. Run `preflight`.
-2. Inspect the complete diff and identify explicit intended paths.
-3. Run `validate`.
-4. Run `commit --message "..." -- path...`.
-5. Run `push`.
-6. Run `verify`.
+## Validate before commit
+From the repo: `npm run validate` and `npm run validate:full` (full Theme Check). Fix all errors. Do relevant visual/critical-flow QA (use chrome-devtools at 320–1440px for customer-facing changes).
 
-Use `ship` only when the same explicit paths are ready for the whole sequence. The script permits unrelated unstaged changes but aborts on unrelated staged changes, wrong branch/origin, active Git operations, behind/diverged state, missing paths, and no-op commits. It supports additions, modifications, renames, and deletions.
+## Commit & push (Desktop Commander only)
+```
+cd /Users/vMac/06_storefront/shopify_github_synched_theme_files
+git add -A && git commit -m "<type(scope): summary>" && git push origin main
+```
+If push is rejected (Shopify reverse-sync added a commit):
+```
+git pull --rebase origin main && git push origin main
+```
 
-Never use `--no-verify`, force push, automatic lock recovery, direct Shopify CLI push/publish/delete, or destructive pulls. Report commit hash, remote equality, live reachability when observable, and remaining risk.
+## Verify
+- Local `HEAD` == `origin/main`.
+- Verify live output when observable (edge cache can lag on the bare domain).
+- `dev` will be fast-forwarded to `main` automatically by `sync-dev.yml`.
+
+## Never
+- `shopify theme push|publish|delete`, any dev server, or `npm run push`/raw deploy. The Bash guard hook blocks these.
+- Touch product/order/customer/inventory/checkout/billing data or app-managed `ecom-*`/`ss-*`/`foxify-*` files without explicit approval.
+
+## Report
+Files changed, checks run, commit hash, push status, remaining production risk.

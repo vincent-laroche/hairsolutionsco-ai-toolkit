@@ -77,42 +77,6 @@
       "category": "Marketing"
     },
     {
-      "name": "shopify-design",
-      "source": {
-        "source": "local",
-        "path": "./plugins/shopify-design"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Developer Tools"
-    },
-    {
-      "name": "shopify-developer",
-      "source": {
-        "source": "local",
-        "path": "./plugins/shopify-developer"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Developer Tools"
-    },
-    {
-      "name": "shopify-liquid-designer",
-      "source": {
-        "source": "local",
-        "path": "./plugins/shopify-liquid-designer"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Developer Tools"
-    },
-    {
       "name": "shopify-theme-dev",
       "source": {
         "source": "local",

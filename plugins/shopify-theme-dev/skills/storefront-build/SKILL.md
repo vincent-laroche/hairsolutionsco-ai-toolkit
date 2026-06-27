@@ -1,14 +1,32 @@
 ---
 name: storefront-build
-description: Use when the user asks to build, add, edit, or fix a Shopify section, block, snippet, template, Liquid component, CSS, JavaScript interaction, or theme-editor behavior in the Hair Solutions Co. storefront.
+description: Write or edit Liquid sections/blocks/snippets for the hairsolutions.co storefront (Horizon 4.1.1) with the Hair Solutions design system. Use for any .liquid section, block, snippet, schema, or theme-editor wiring. Single Color Palette, OKLCH tokens, Instrument Serif/Geist.
 ---
 
-# Storefront Build
+# Storefront build (Horizon 4.1.1 + design system)
 
-Operate in `/Users/vMac/06_storefront`. Read the target, its template, and nearby examples before editing.
+Everyday skill for writing theme code. Read `references/theme-map.md` for the section/template/collection map. For customer-facing visual/copy work, also load the `hair-solutions-co-design` skill (`/Users/vMac/06_storefront/Hair Solutions Co. Design System/SKILL.md`) and link its `styles.css` — never hardcode tokens.
 
-Choose the smallest Horizon 3.5.1-compatible change. Preserve settings IDs, merchant content, blocks, dynamic sources, metafields, app blocks, `block.shopify_attributes`, and editor lifecycle behavior. Use `hs-custom-*` for new components unless the local family establishes a better prefix. Do not touch `ecom-*`, `ss-*`, or `foxify-*` files unless explicitly requested.
+## Horizon 4.1.1 rules
+- ONE **Color Palette** (color schemes are gone): use `settings.color_palette.background` / `settings.color_palette.foreground`. Do not add scheme settings.
+- OS 2.0 architecture: sections + theme blocks (`{% content_for 'blocks' %}`), `{% schema %}` with stable setting IDs and presets. Preserve `block.shopify_attributes` on every rendered block.
+- New custom components use the `hs-custom-*` prefix. Reuse existing blocks/snippets (see theme-map) before inventing.
+- Liquid: use `.value` for metaobject/metafield values; never pipe inside `[ ]` (assign first); use whitespace control.
+- Inspect nearby files first; make small focused diffs. Don't modify app-managed `ecom-*`/`ss-*`/`foxify-*`.
 
-For customer-facing work, read `PRODUCT.md`, relevant portions of `DESIGN.md`, and load the installed brand, frontend, Liquid, accessibility, Impeccable, or design-critique skills required by the actual change. Do not load all of them for tooling or Git work.
+## Definition of Done (check every item before committing)
+- Corners ≤4px UI / ≤8px cards. Pills only for badges/chips.
+- Colors: OKLCH design-system tokens only. No hardcoded hex.
+- Type: Instrument Serif (display/H1/H2), Geist (H3↓/body/UI), Geist Mono (prices/specs/eyebrows). Nothing else.
+- Shadows: two-layer card token (light + obsidian variants). No single-layer/glow/colored shadows.
+- Spacing: 4px scale; `clamp()` for fluid sizing.
+- Backgrounds: flat `--off-white` or `--obsidian`. No gradients/patterns/glass.
+- Mobile: side padding 20–28px, no horizontal scroll, touch targets ≥44px. QA at 320/375/390/430.
+- Accent `--clay`: once per view max, never on body text or light backgrounds.
+- Schema/IDs stable, dynamic sources intact, theme-editor compatible.
+- SEO: one H1, logical headings, semantic HTML, metadata/JSON-LD/internal links preserved, FAQ schema only for visible FAQ.
 
-Validate with the repository fast validation during iteration and full validation before release. Verify responsive behavior and critical customer flows when the changed surface requires it.
+## Media
+Cloudinary only — see `cloudinary-media` skill. AssetLink for products/collections/blogs; Files CDN for pages. Never duplicate into theme `assets/`.
+
+When done, ship via `storefront-release`.

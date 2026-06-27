@@ -69,43 +69,13 @@
       "category": "Marketing"
     },
     {
-      "name": "shopify-design",
-      "source": "./plugins/shopify-design",
-      "description": "Complete Shopify development and design toolkit: Liquid templating, theme development, Shopify API, performance optimization, debugging, UI/UX design system, and Figma automation.",
-      "version": "0.1.0",
-      "author": {
-        "name": "Hair Solutions Co."
-      },
-      "category": "Developer Tools"
-    },
-    {
-      "name": "shopify-developer",
-      "source": "./plugins/shopify-developer",
-      "description": "Shopify theme development for Hair Solutions Co. — Horizon 3.5.1 Liquid, front-end CSS/JS, and production operations.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Hair Solutions Co"
-      },
-      "category": "Developer Tools"
-    },
-    {
-      "name": "shopify-liquid-designer",
-      "source": "./plugins/shopify-liquid-designer",
-      "description": "Design-first Shopify theme development for Hair Solutions Co. Design in Figma first, generate production-ready Liquid with floating cards, Horizon theme mastery, Storefront API support, and full UI/UX intelligence.",
-      "version": "0.3.0",
-      "author": {
-        "name": "Hair Solutions Co"
-      },
-      "category": "Developer Tools"
-    },
-    {
       "name": "shopify-theme-dev",
       "source": "./plugins/shopify-theme-dev",
-      "description": "Designer-in-Chief, Creative Director, and Liquid-specialist toolkit for the OneHead Hair Solutions storefront (hairsolutions.co) — brand system, OS 2.0 sections, Cloudinary AssetLink media, Notion change-tracker, and ship-to-main workflow.",
-      "version": "1.1.0",
+      "description": "Shopify Liquid theme toolkit for the Hair Solutions Co. storefront (hairsolutions.co, Horizon 4.1.1). GitHub-synced Main/Dev release workflow (no Shopify CLI, no dev server), single Color Palette + design system, Cloudinary AssetLink media, metaobjects/metafields, custom product options, the advanced custom-order picker, and the custom Help Center. Includes Brand-Compliance, SEO, and Mobile-First agents.",
+      "version": "2.0.0",
       "author": {
         "name": "Vincent Laroche",
-        "email": "vincent.laroche@oneheadhair.com"
+        "email": "info@hairsolutions.co"
       },
       "category": "Developer Tools"
     },
